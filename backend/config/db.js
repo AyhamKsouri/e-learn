@@ -1,25 +1,14 @@
-const mongoose = require("mongoose");
+// backend/config/db.js
+const mongoose = require('mongoose');
 
-const options = {
-  maxPoolSize: 10,
-  //autoIndex: false,
+const connectDB = async () => {
+    try {
+        const conn = await mongoose.connect(process.env.DB_URL);
+        console.log(`✅ MongoDB Connected: ${conn.connection.host}`);
+    } catch (error) {
+        console.error(`❌ Error: ${error.message}`);
+        process.exit(1);
+    }
 };
 
-var db;
-
-const connect = async () => {
-  try {
-    db = await mongoose.connect(process.env.DB_URL, options);
-    console.log("MongoDB Connected");
-  } catch (error) {
-    console.error(error);
-    process.exit(1);
-  }
-};
-
-const get = () => {
-  return db;
-};
-
-exports.getDB = get;
-exports.connectDB = connect;
+module.exports = connectDB;
