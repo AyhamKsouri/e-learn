@@ -1,0 +1,18 @@
+{
+  "nav": {
+    "home": "Accueil",
+    "courses": "Cours",
+    "student": "Étudiant",
+    "teacher": "Enseignant",
+    "admin": "Admin"
+  },
+  "auth": {
+    "signIn": "Se connecter",
+    "getStarted": "Commencer"
+  },
+  "footer": {
+    "browse": "Parcourir",
+    "teach": "Enseigner",
+    "login": "Connexion"
+  }
+}

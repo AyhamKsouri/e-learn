@@ -1,0 +1,18 @@
+{
+  "nav": {
+    "home": "Home",
+    "courses": "Courses",
+    "student": "Student",
+    "teacher": "Teacher",
+    "admin": "Admin"
+  },
+  "auth": {
+    "signIn": "Sign in",
+    "getStarted": "Get started"
+  },
+  "footer": {
+    "browse": "Browse",
+    "teach": "Teach",
+    "login": "Login"
+  }
+}
