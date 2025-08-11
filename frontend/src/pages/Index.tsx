@@ -3,6 +3,7 @@
 import { Helmet } from "react-helmet-async";
 import { Button } from "@/components/ui/button";
 import { CourseCard } from "@/components/CourseCard";
+import StudentWelcome from "@/components/StudentWelcome";
 import hero from "@/assets/hero-education.jpg";
 import { mockCourses } from "@/data/mockCourses";
 import { Link } from "react-router-dom";
@@ -32,7 +33,9 @@ const Index = () => {
       >
         <div className="container grid lg:grid-cols-2 gap-10 py-20 items-center">
           <div>
-            <h1 className="text-4xl md:text-5xl font-semibold leading-tight">{t("home.hero.title")}</h1>
+            <h1 className="text-4xl md:text-5xl font-semibold leading-tight">
+              {t("home.hero.title")}
+            </h1>
             <p className="mt-4 text-lg text-muted-foreground">{t("home.hero.subtitle")}</p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Button asChild variant="hero" className="px-6 py-6 text-base">
@@ -51,6 +54,9 @@ const Index = () => {
           </div>
         </div>
       </section>
+
+      {/* Student Welcome Section - Shows personalized content for logged-in students */}
+      <StudentWelcome />
 
       <section className="container py-16">
         <h2 className="text-2xl font-semibold">{t("home.featured.title")}</h2>

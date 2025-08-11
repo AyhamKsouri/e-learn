@@ -6,6 +6,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
 import ThemeProvider from "@/providers/ThemeProvider";
+import { UserProvider } from "@/contexts/UserContext";
 import MainLayout from "@/components/layout/MainLayout";
 import Index from "./pages/Index";
 import Courses from "./pages/Courses";
@@ -23,26 +24,28 @@ const App = () => (
   <HelmetProvider>
     <QueryClientProvider client={queryClient}>
       <ThemeProvider>
-        <TooltipProvider>
-          <Toaster />
-          <Sonner />
-          <BrowserRouter>
-            <MainLayout>
-              <Routes>
-                <Route path="/" element={<Index />} />
-                <Route path="/courses" element={<Courses />} />
-                <Route path="/courses/:id" element={<CourseDetail />} />
-                <Route path="/auth" element={<Auth />} />
-                <Route path="/about" element={<About />} />
-                <Route path="/dashboard/student" element={<StudentDashboard />} />
-                <Route path="/dashboard/teacher" element={<TeacherDashboard />} />
-                <Route path="/dashboard/admin" element={<AdminDashboard />} />
-                {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-                <Route path="*" element={<NotFound />} />
-              </Routes>
-            </MainLayout>
-          </BrowserRouter>
-        </TooltipProvider>
+        <UserProvider>
+          <TooltipProvider>
+            <Toaster />
+            <Sonner />
+            <BrowserRouter>
+              <MainLayout>
+                <Routes>
+                  <Route path="/" element={<Index />} />
+                  <Route path="/courses" element={<Courses />} />
+                  <Route path="/courses/:id" element={<CourseDetail />} />
+                  <Route path="/auth" element={<Auth />} />
+                  <Route path="/about" element={<About />} />
+                  <Route path="/dashboard/student" element={<StudentDashboard />} />
+                  <Route path="/dashboard/teacher" element={<TeacherDashboard />} />
+                  <Route path="/dashboard/admin" element={<AdminDashboard />} />
+                  {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+                  <Route path="*" element={<NotFound />} />
+                </Routes>
+              </MainLayout>
+            </BrowserRouter>
+          </TooltipProvider>
+        </UserProvider>
       </ThemeProvider>
     </QueryClientProvider>
   </HelmetProvider>

@@ -1,11 +1,13 @@
 import { useState } from "react";
 import { Helmet } from "react-helmet-async";
+import { useNavigate } from "react-router-dom";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { toast } from "@/hooks/use-toast";
 import { useTranslation } from "react-i18next";
+import { useUser } from "@/contexts/UserContext";
 import { registerUser, loginUser } from "@/api/auth";
 
 export default function Auth() {
@@ -21,13 +23,38 @@ export default function Auth() {
   const [role, setRole] = useState("");
   
   const { t } = useTranslation();
+  const { login } = useUser();
+  const navigate = useNavigate();
 
   const handleSignIn = async () => {
     try {
       setLoading(true);
       const res = await loginUser({ email: signinEmail, password: signinPassword });
       if (res.token) {
+        // Store token in localStorage
+        localStorage.setItem('token', res.token);
+        
+        // Login user through context
+        login({
+          _id: res._id,
+          name: res.name,
+          email: res.email,
+          role: res.role,
+          enrolledCourses: res.enrolledCourses || [],
+          completedCourses: res.completedCourses || [],
+          createdAt: res.createdAt || new Date().toISOString()
+        });
+        
         toast({ title: "Signed in successfully", description: `Welcome back ${res.name}` });
+        
+        // Redirect based on role
+        if (res.role === 'student') {
+          navigate('/dashboard/student');
+        } else if (res.role === 'teacher') {
+          navigate('/dashboard/teacher');
+        } else if (res.role === 'admin') {
+          navigate('/dashboard/admin');
+        }
       } else {
         toast({ title: "Sign in failed", description: res.message || "Invalid credentials", variant: "destructive" });
       }
@@ -56,7 +83,30 @@ export default function Auth() {
       });
 
       if (res.token) {
+        // Store token in localStorage
+        localStorage.setItem('token', res.token);
+        
+        // Login user through context
+        login({
+          _id: res._id,
+          name: res.name,
+          email: res.email,
+          role: res.role,
+          enrolledCourses: res.enrolledCourses || [],
+          completedCourses: res.completedCourses || [],
+          createdAt: res.createdAt || new Date().toISOString()
+        });
+        
         toast({ title: "Account created", description: `Welcome ${res.name}` });
+        
+        // Redirect based on role
+        if (res.role === 'student') {
+          navigate('/dashboard/student');
+        } else if (res.role === 'teacher') {
+          navigate('/dashboard/teacher');
+        } else if (res.role === 'admin') {
+          navigate('/dashboard/admin');
+        }
       } else {
         toast({ title: "Sign up failed", description: res.message || "Could not create account", variant: "destructive" });
       }

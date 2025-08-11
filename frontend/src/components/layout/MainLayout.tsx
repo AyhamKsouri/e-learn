@@ -3,6 +3,8 @@ import { Button } from "@/components/ui/button";
 import { useIsMobile } from "@/hooks/use-mobile";
 import ThemeToggle from "@/features/theme/ThemeToggle";
 import LanguageSwitcher from "@/features/i18n/LanguageSwitcher";
+import StudentProfileDropdown from "@/components/StudentProfileDropdown";
+import { useUser } from "@/contexts/UserContext";
 import { useTranslation } from "react-i18next";
 
 const navLinkCls = ({ isActive }: { isActive: boolean }) =>
@@ -11,6 +13,7 @@ const navLinkCls = ({ isActive }: { isActive: boolean }) =>
 export default function MainLayout({ children }: { children: React.ReactNode }) {
   const isMobile = useIsMobile();
   const { t } = useTranslation();
+  const { user, isAuthenticated } = useUser();
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
@@ -30,18 +33,25 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
               <NavLink to="/about" className={navLinkCls}>
                 {t("nav.about")}
               </NavLink>
-             
             </nav>
           )}
           <div className="flex items-center gap-2">
             <LanguageSwitcher />
             <ThemeToggle />
-            <Button asChild variant="outline">
-              <Link to="/auth">{t("auth.signIn")}</Link>
-            </Button>
-            <Button asChild>
-              <Link to="/auth">{t("auth.getStarted")}</Link>
-            </Button>
+            
+            {/* Conditional rendering based on auth status */}
+            {isAuthenticated ? (
+              <StudentProfileDropdown />
+            ) : (
+              <>
+                <Button asChild variant="outline">
+                  <Link to="/auth">{t("auth.signIn")}</Link>
+                </Button>
+                <Button asChild>
+                  <Link to="/auth">{t("auth.getStarted")}</Link>
+                </Button>
+              </>
+            )}
           </div>
         </div>
       </header>

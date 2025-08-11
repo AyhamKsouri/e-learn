@@ -216,6 +216,21 @@
     }
   },
 
+  "student": {
+    "profile": {
+      "enrolled": "Enrolled",
+      "completed": "Completed",
+      "progress": "Progress",
+      "myDashboard": "My Dashboard",
+      "myCourses": "My Courses",
+      "learningPath": "Learning Path",
+      "achievements": "Achievements",
+      "studyTimer": "Study Timer",
+      "settings": "Settings",
+      "signOut": "Sign Out"
+    }
+  },
+
   "courseCard": {
     "by": "By {{instructor}}",
     "view": "View"

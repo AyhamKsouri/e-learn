@@ -1,18 +1,24 @@
 const API_URL = "http://localhost:5000/api/users";
 
 interface UserData {
-  name?: string;
+  name: string;
   email: string;
   password: string;
-  role?: string;
+  role: string;
 }
 
 interface AuthResponse {
-  _id?: string;
-  name?: string;
-  email?: string;
-  role?: string;
-  token?: string;
+  _id: string;
+  name: string;
+  email: string;
+  role: 'student' | 'teacher' | 'admin';
+  token: string;
+  enrolledCourses?: Array<{
+    course: string;
+    progress: number;
+  }>;
+  completedCourses?: string[];
+  createdAt: string;
   message?: string;
 }
 
@@ -22,7 +28,13 @@ export const registerUser = async (userData: UserData): Promise<AuthResponse> =>
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(userData),
   });
-  return await res.json();
+  const data = await res.json();
+  
+  if (!res.ok) {
+    throw new Error(data.message || 'Registration failed');
+  }
+  
+  return data;
 };
 
 export const loginUser = async (credentials: { email: string; password: string }): Promise<AuthResponse> => {
@@ -31,5 +43,11 @@ export const loginUser = async (credentials: { email: string; password: string }
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(credentials),
   });
-  return await res.json();
+  const data = await res.json();
+  
+  if (!res.ok) {
+    throw new Error(data.message || 'Login failed');
+  }
+  
+  return data;
 };
