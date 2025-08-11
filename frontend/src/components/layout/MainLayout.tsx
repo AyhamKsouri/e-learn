@@ -27,10 +27,7 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
               <NavLink to="/courses" className={navLinkCls}>
                 {t("nav.courses")}
               </NavLink>
-              <NavLink to="/dashboard/Teachers" className={navLinkCls}>
-                {t("nav.teachers")}
-              </NavLink>
-              <NavLink to="/dashboard/About" className={navLinkCls}>
+              <NavLink to="/about" className={navLinkCls}>
                 {t("nav.about")}
               </NavLink>
              

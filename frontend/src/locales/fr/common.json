@@ -57,6 +57,52 @@
     "name": "EduFlow"
   },
 
+  "about": {
+    "meta": {
+      "title": "À propos | EduFlow",
+      "description": "En savoir plus sur notre mission, notre équipe et pourquoi nous avons construit cette plateforme d'apprentissage en ligne pour les étudiants et les enseignants."
+    },
+    "hero": {
+      "title": "À propos",
+      "subtitle": "Donner aux étudiants et aux enseignants une expérience d'apprentissage en ligne moderne et facile à utiliser qui transforme notre façon d'apprendre et d'enseigner."
+    },
+    "mission": {
+      "title": "Notre Mission",
+      "description": "Nous avons créé cette plateforme pour connecter des enseignants passionnés avec des apprenants désireux du monde entier. Notre objectif est de briser les barrières à l'éducation en fournissant des opportunités d'apprentissage de haute qualité, abordables et accessibles pour tous — partout, à tout moment.",
+      "button": "Explorer nos cours"
+    },
+    "features": {
+      "title": "Pourquoi choisir EduFlow ?",
+      "learnAtPace": {
+        "title": "Apprenez à votre rythme",
+        "description": "Accédez à vos cours à tout moment et apprenez de n'importe où dans le monde."
+      },
+      "expertTeachers": {
+        "title": "Enseignants experts",
+        "description": "Apprenez auprès de professionnels du secteur et d'éducateurs expérimentés."
+      },
+      "modernTech": {
+        "title": "Technologie moderne",
+        "description": "Profitez d'une plateforme d'apprentissage fluide et adaptée aux mobiles, conçue pour 2025."
+      },
+      "communitySupport": {
+        "title": "Support communautaire",
+        "description": "Rejoignez notre communauté d'étudiants et obtenez de l'aide quand vous en avez besoin."
+      }
+    },
+    "stats": {
+      "activeStudents": "Étudiants actifs",
+      "expertTeachers": "Enseignants experts",
+      "satisfactionRate": "Taux de satisfaction"
+    },
+    "cta": {
+      "title": "Prêt à transformer votre apprentissage ?",
+      "subtitle": "Rejoignez des milliers d'étudiants qui apprennent déjà sur EduFlow et commencez votre voyage aujourd'hui.",
+      "getStarted": "Commencer",
+      "exploreCourses": "Explorer les cours"
+    }
+  },
+
   "home": {
     "meta": {
       "title": "EduFlow — Apprendre, Enseigner, Progresser",

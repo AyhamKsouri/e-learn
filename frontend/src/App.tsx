@@ -11,6 +11,7 @@ import Index from "./pages/Index";
 import Courses from "./pages/Courses";
 import CourseDetail from "./pages/CourseDetail";
 import Auth from "./pages/Auth";
+import About from "./pages/about";
 import StudentDashboard from "./pages/dashboard/StudentDashboard";
 import TeacherDashboard from "./pages/dashboard/TeacherDashboard";
 import AdminDashboard from "./pages/dashboard/AdminDashboard";
@@ -32,6 +33,7 @@ const App = () => (
                 <Route path="/courses" element={<Courses />} />
                 <Route path="/courses/:id" element={<CourseDetail />} />
                 <Route path="/auth" element={<Auth />} />
+                <Route path="/about" element={<About />} />
                 <Route path="/dashboard/student" element={<StudentDashboard />} />
                 <Route path="/dashboard/teacher" element={<TeacherDashboard />} />
                 <Route path="/dashboard/admin" element={<AdminDashboard />} />

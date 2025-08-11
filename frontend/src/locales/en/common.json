@@ -57,6 +57,52 @@
     "name": "EduFlow"
   },
 
+  "about": {
+    "meta": {
+      "title": "About Us | EduFlow",
+      "description": "Learn more about our mission, our team, and why we built this e-learning platform for students and teachers."
+    },
+    "hero": {
+      "title": "About",
+      "subtitle": "Empowering students and teachers with a modern, easy-to-use e-learning experience that transforms how we learn and teach."
+    },
+    "mission": {
+      "title": "Our Mission",
+      "description": "We started this platform to connect passionate teachers with eager learners around the world. Our goal is to break down barriers to education by providing high-quality, affordable, and accessible learning opportunities for everyone — anywhere, anytime.",
+      "button": "Explore Our Courses"
+    },
+    "features": {
+      "title": "Why Choose EduFlow?",
+      "learnAtPace": {
+        "title": "Learn at Your Pace",
+        "description": "Access your courses anytime and learn from anywhere in the world."
+      },
+      "expertTeachers": {
+        "title": "Expert Teachers",
+        "description": "Learn from industry professionals and experienced educators."
+      },
+      "modernTech": {
+        "title": "Modern Technology",
+        "description": "Enjoy a smooth, mobile-friendly learning platform built for 2025."
+      },
+      "communitySupport": {
+        "title": "Community Support",
+        "description": "Join our student community and get help whenever you need it."
+      }
+    },
+    "stats": {
+      "activeStudents": "Active Students",
+      "expertTeachers": "Expert Teachers",
+      "satisfactionRate": "Satisfaction Rate"
+    },
+    "cta": {
+      "title": "Ready to transform your learning?",
+      "subtitle": "Join thousands of students already learning on EduFlow and start your journey today.",
+      "getStarted": "Get Started",
+      "exploreCourses": "Explore Courses"
+    }
+  },
+
   "home": {
     "meta": {
       "title": "EduFlow — Learn, Teach, Thrive",
