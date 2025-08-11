@@ -3,16 +3,18 @@ import { Helmet } from "react-helmet-async";
 import { mockCourses } from "@/data/mockCourses";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { useTranslation } from "react-i18next";
 
 export default function CourseDetail() {
   const { id } = useParams();
   const course = mockCourses.find((c) => c.id === id);
+  const { t } = useTranslation();
 
   if (!course) {
     return (
       <div className="container py-16">
-        <p className="text-muted-foreground">Course not found.</p>
-        <Button asChild className="mt-4"><Link to="/courses">Back to courses</Link></Button>
+        <p className="text-muted-foreground">{t("course.notFound")}</p>
+        <Button asChild className="mt-4"><Link to="/courses">{t("course.backToCourses")}</Link></Button>
       </div>
     );
   }
@@ -34,10 +36,10 @@ export default function CourseDetail() {
             />
           </div>
           <h1 className="mt-6 text-3xl font-semibold">{course.title}</h1>
-          <p className="text-muted-foreground mt-2">By {course.instructor} • ⭐ {course.rating.toFixed(1)}</p>
+          <p className="text-muted-foreground mt-2">{t("course.byInstructor", { instructor: course.instructor })} • ⭐ {course.rating.toFixed(1)}</p>
           <p className="mt-4 text-base leading-relaxed">{course.description}</p>
 
-          <h2 className="mt-8 text-xl font-medium">Lessons</h2>
+          <h2 className="mt-8 text-xl font-medium">{t("course.lessons")}</h2>
           <ul className="mt-3 space-y-2">
             {course.lessons?.map((l, i) => (
               <li key={i} className="flex items-center justify-between rounded-md border p-3">
@@ -51,10 +53,10 @@ export default function CourseDetail() {
         <aside>
           <Card className="p-6 sticky top-24">
             <div className="text-3xl font-semibold">${course.price.toFixed(2)}</div>
-            <p className="text-sm text-muted-foreground mt-1">One-time purchase</p>
-            <Button className="mt-6 w-full">Buy Now (Mock)</Button>
+            <p className="text-sm text-muted-foreground mt-1">{t("course.oneTimePurchase")}</p>
+            <Button className="mt-6 w-full">{t("course.buyNow")}</Button>
             <Button asChild variant="outline" className="mt-2 w-full">
-              <Link to="/auth">Sign in to save progress</Link>
+              <Link to="/auth">{t("course.signInToSave")}</Link>
             </Button>
           </Card>
         </aside>

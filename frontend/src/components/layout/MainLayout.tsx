@@ -17,7 +17,7 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
       <header className="sticky top-0 z-40 bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b">
         <div className="container flex h-16 items-center justify-between">
           <Link to="/" className="font-semibold text-lg tracking-tight">
-            EduFlow
+            {t("brand.name")}
           </Link>
           {!isMobile && (
             <nav className="flex items-center gap-6 text-sm">
@@ -27,15 +27,13 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
               <NavLink to="/courses" className={navLinkCls}>
                 {t("nav.courses")}
               </NavLink>
-              <NavLink to="/dashboard/student" className={navLinkCls}>
-                {t("nav.student")}
+              <NavLink to="/dashboard/Teachers" className={navLinkCls}>
+                {t("nav.teachers")}
               </NavLink>
-              <NavLink to="/dashboard/teacher" className={navLinkCls}>
-                {t("nav.teacher")}
+              <NavLink to="/dashboard/About" className={navLinkCls}>
+                {t("nav.about")}
               </NavLink>
-              <NavLink to="/dashboard/admin" className={navLinkCls}>
-                {t("nav.admin")}
-              </NavLink>
+             
             </nav>
           )}
           <div className="flex items-center gap-2">
@@ -55,7 +53,7 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
 
       <footer className="border-t py-8">
         <div className="container text-sm text-muted-foreground flex flex-col md:flex-row items-center justify-between gap-3">
-          <p>© {new Date().getFullYear()} EduFlow. All rights reserved.</p>
+          <p>{t("footer.copyright", { year: new Date().getFullYear() })}</p>
           <div className="flex items-center gap-6">
             <Link to="/courses" className="hover:text-foreground transition-colors">{t("footer.browse")}</Link>
             <Link to="/dashboard/teacher" className="hover:text-foreground transition-colors">{t("footer.teach")}</Link>

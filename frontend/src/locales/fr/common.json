@@ -4,15 +4,174 @@
     "courses": "Cours",
     "student": "Étudiant",
     "teacher": "Enseignant",
-    "admin": "Admin"
+    "admin": "Admin",
+    "teachers": "Enseignants",
+    "about": "À propos",
+    "contact": "Contact",
+    "profile": "Profil",
+    "settings": "Paramètres",
+    "logout": "Déconnexion",
+    "login": "Connexion",
+    "register": "S'inscrire"
+    
   },
   "auth": {
     "signIn": "Se connecter",
-    "getStarted": "Commencer"
+    "getStarted": "Commencer",
+    "pageTitle": "Se connecter ou s'inscrire | EduFlow",
+    "metaDescription": "Connectez-vous ou créez votre compte sur EduFlow.",
+    "welcome": "Bienvenue sur EduFlow",
+    "tabs": {
+      "signIn": "Connexion",
+      "signUp": "Inscription"
+    },
+    "inputs": {
+      "email": "Email",
+      "password": "Mot de passe"
+    },
+    "buttons": {
+      "signIn": "Se connecter",
+      "createAccount": "Créer un compte"
+    },
+    "toasts": {
+      "signIn": {
+        "successTitle": "Bon retour !",
+        "successDesc": "Connexion réussie (simulation).",
+        "failTitle": "Échec de la connexion"
+      },
+      "signUp": {
+        "successTitle": "Compte créé",
+        "successDesc": "Inscription terminée (simulation).",
+        "failTitle": "Échec de l'inscription"
+      }
+    }
   },
   "footer": {
     "browse": "Parcourir",
     "teach": "Enseigner",
-    "login": "Connexion"
+    "login": "Connexion",
+    "copyright": "© {{year}} EduFlow. Tous droits réservés."
+  },
+
+  "brand": {
+    "name": "EduFlow"
+  },
+
+  "home": {
+    "meta": {
+      "title": "EduFlow — Apprendre, Enseigner, Progresser",
+      "description": "Parcourez, achetez et suivez des cours. Les enseignants créent et vendent. Les administrateurs gèrent la plateforme."
+    },
+    "hero": {
+      "title": "Développez vos compétences avec des cours en ligne sélectionnés",
+      "subtitle": "Apprentissage clair et intuitif pour les étudiants. Outils puissants pour les enseignants. Visibilité pour les administrateurs.",
+      "browse": "Parcourir les cours",
+      "becomeTeacher": "Devenir enseignant",
+      "imgAlt": "Illustration de la plateforme d'apprentissage en ligne"
+    },
+    "featured": {
+      "title": "Cours à la une",
+      "subtitle": "Sélectionnés pour bien démarrer."
+    }
+  },
+
+  "courses": {
+    "meta": {
+      "title": "Parcourir les cours | EduFlow",
+      "description": "Parcourez et recherchez des cours en ligne sur EduFlow."
+    },
+    "heading": "Parcourir les cours",
+    "subheading": "Trouvez la prochaine compétence à maîtriser.",
+    "searchPlaceholder": "Rechercher des cours ou des instructeurs..."
+  },
+
+  "course": {
+    "notFound": "Cours introuvable.",
+    "backToCourses": "Retour aux cours",
+    "byInstructor": "Par {{instructor}}",
+    "lessons": "Leçons",
+    "oneTimePurchase": "Achat unique",
+    "buyNow": "Acheter maintenant (simulation)",
+    "signInToSave": "Connectez-vous pour enregistrer votre progression"
+  },
+
+  "dashboards": {
+    "teacher": {
+      "meta": {
+        "title": "Tableau de bord Enseignant | EduFlow",
+        "description": "Créez et gérez vos cours sur EduFlow."
+      },
+      "heading": "Votre enseignement",
+      "createCourse": "Créer un cours",
+      "stats": {
+        "totalSales": "Ventes totales",
+        "enrolledStudents": "Étudiants inscrits",
+        "courses": "Cours"
+      }
+    },
+    "student": {
+      "meta": {
+        "title": "Tableau de bord Étudiant | EduFlow",
+        "description": "Suivez votre progression sur EduFlow."
+      },
+      "heading": "Votre apprentissage",
+      "stats": {
+        "activeCourses": "Cours actifs",
+        "completed": "Terminés",
+        "hoursStudied": "Heures étudiées"
+      }
+    },
+    "admin": {
+      "meta": {
+        "title": "Tableau de bord Admin | EduFlow",
+        "description": "Gérez les utilisateurs, rapports et analyses sur EduFlow."
+      },
+      "heading": "Vue d'ensemble de la plateforme",
+      "stats": {
+        "users": "Utilisateurs",
+        "activeCourses": "Cours actifs",
+        "monthlyRevenue": "Revenu mensuel",
+        "reports": "Rapports"
+      }
+    }
+  },
+
+  "notFound": {
+    "title": "404",
+    "message": "Oups ! Page introuvable",
+    "returnHome": "Retour à l'accueil"
+  },
+
+  "ui": {
+    "common": {
+      "close": "Fermer"
+    },
+    "theme": {
+      "toggle": "Basculer le thème",
+      "light": "Clair",
+      "dark": "Sombre",
+      "system": "Système"
+    },
+    "pagination": {
+      "previous": "Précédent",
+      "next": "Suivant",
+      "morePages": "Plus de pages",
+      "aria": {
+        "prevPage": "Aller à la page précédente",
+        "nextPage": "Aller à la page suivante"
+      }
+    },
+    "carousel": {
+      "prevSlide": "Diapositive précédente",
+      "nextSlide": "Diapositive suivante"
+    },
+    "breadcrumb": {
+      "more": "Plus"
+    }
+  },
+
+  "courseCard": {
+    "by": "Par {{instructor}}",
+    "view": "Voir"
   }
 }

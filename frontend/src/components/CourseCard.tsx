@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { useTranslation } from "react-i18next";
 
 export type Lesson = { title: string; duration: string };
 export type Course = {
@@ -15,6 +16,7 @@ export type Course = {
 };
 
 export function CourseCard({ course }: { course: Course }) {
+  const { t } = useTranslation();
   return (
     <Card className="group overflow-hidden h-full border hover:shadow-lg transition-[transform,box-shadow] duration-300 ease-out hover:-translate-y-0.5">
       <div className="relative aspect-[16/9] overflow-hidden">
@@ -29,14 +31,14 @@ export function CourseCard({ course }: { course: Course }) {
       </CardHeader>
       <CardContent>
         <div className="flex items-center justify-between text-sm">
-          <span className="text-muted-foreground">By {course.instructor}</span>
+          <span className="text-muted-foreground">{t("courseCard.by", { instructor: course.instructor })}</span>
           <span className="font-medium">${course.price.toFixed(2)}</span>
         </div>
       </CardContent>
       <CardFooter className="flex items-center justify-between">
         <span className="text-xs text-muted-foreground">⭐ {course.rating.toFixed(1)}</span>
         <Button asChild size="sm">
-          <Link to={`/courses/${course.id}`}>View</Link>
+          <Link to={`/courses/${course.id}`}>{t("courseCard.view")}</Link>
         </Button>
       </CardFooter>
     </Card>

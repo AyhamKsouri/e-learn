@@ -3,9 +3,11 @@ import { Input } from "@/components/ui/input";
 import { CourseCard } from "@/components/CourseCard";
 import { mockCourses } from "@/data/mockCourses";
 import { useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 export default function Courses() {
   const [q, setQ] = useState("");
+  const { t } = useTranslation();
   const list = useMemo(() => {
     const s = q.trim().toLowerCase();
     if (!s) return mockCourses;
@@ -17,19 +19,19 @@ export default function Courses() {
   return (
     <div className="container py-12">
       <Helmet>
-        <title>Browse Courses | EduFlow</title>
-        <meta name="description" content="Browse and search online courses on EduFlow." />
+        <title>{t("courses.meta.title")}</title>
+        <meta name="description" content={t("courses.meta.description") as string} />
         <link rel="canonical" href="/courses" />
       </Helmet>
 
       <section className="mb-8">
-        <h1 className="text-3xl font-semibold">Browse Courses</h1>
-        <p className="text-muted-foreground">Find your next skill to master.</p>
+        <h1 className="text-3xl font-semibold">{t("courses.heading")}</h1>
+        <p className="text-muted-foreground">{t("courses.subheading")}</p>
       </section>
 
       <div className="mb-8 max-w-xl">
         <Input
-          placeholder="Search courses or instructors..."
+          placeholder={t("courses.searchPlaceholder") as string}
           value={q}
           onChange={(e) => setQ(e.target.value)}
         />

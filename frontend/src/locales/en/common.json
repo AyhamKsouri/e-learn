@@ -4,15 +4,174 @@
     "courses": "Courses",
     "student": "Student",
     "teacher": "Teacher",
-    "admin": "Admin"
+    "admin": "Admin",
+    "teachers": "Teachers",
+    "about": "About",
+    "contact": "Contact",
+    "profile": "Profile",
+    "settings": "Settings",
+    "logout": "Logout",
+    "login": "Login",
+    "register": "Register"
   },
   "auth": {
     "signIn": "Sign in",
-    "getStarted": "Get started"
+    "getStarted": "Get started",
+    "pageTitle": "Login or Register | EduFlow",
+    "metaDescription": "Sign in or create your account on EduFlow.",
+    "welcome": "Welcome to EduFlow",
+    "tabs": {
+      "signIn": "Sign In",
+      "signUp": "Sign Up"
+    },
+    "inputs": {
+      "email": "Email",
+      "password": "Password"
+    },
+    "buttons": {
+      "signIn": "Sign In",
+      "createAccount": "Create Account"
+    },
+    "toasts": {
+      "signIn": {
+        "successTitle": "Welcome back!",
+        "successDesc": "Signed in successfully (mock).",
+        "failTitle": "Sign in failed"
+      },
+      "signUp": {
+        "successTitle": "Account created",
+        "successDesc": "Mock sign up complete.",
+        "failTitle": "Sign up failed"
+      }
+    }
   },
+  
   "footer": {
     "browse": "Browse",
     "teach": "Teach",
-    "login": "Login"
+    "login": "Login",
+    "copyright": "© {{year}} EduFlow. All rights reserved."
+  },
+
+  "brand": {
+    "name": "EduFlow"
+  },
+
+  "home": {
+    "meta": {
+      "title": "EduFlow — Learn, Teach, Thrive",
+      "description": "Browse, buy, and complete courses. Teachers create and sell. Admins manage the platform."
+    },
+    "hero": {
+      "title": "Level up your skills with curated online courses",
+      "subtitle": "Clean, intuitive learning for students. Powerful tools for teachers. Clarity for admins.",
+      "browse": "Browse Courses",
+      "becomeTeacher": "Become a Teacher",
+      "imgAlt": "Online learning platform hero illustration"
+    },
+    "featured": {
+      "title": "Featured Courses",
+      "subtitle": "Hand-picked to kickstart your journey."
+    }
+  },
+
+  "courses": {
+    "meta": {
+      "title": "Browse Courses | EduFlow",
+      "description": "Browse and search online courses on EduFlow."
+    },
+    "heading": "Browse Courses",
+    "subheading": "Find your next skill to master.",
+    "searchPlaceholder": "Search courses or instructors..."
+  },
+
+  "course": {
+    "notFound": "Course not found.",
+    "backToCourses": "Back to courses",
+    "byInstructor": "By {{instructor}}",
+    "lessons": "Lessons",
+    "oneTimePurchase": "One-time purchase",
+    "buyNow": "Buy Now (Mock)",
+    "signInToSave": "Sign in to save progress"
+  },
+
+  "dashboards": {
+    "teacher": {
+      "meta": {
+        "title": "Teacher Dashboard | EduFlow",
+        "description": "Create and manage your courses on EduFlow."
+      },
+      "heading": "Your Teaching",
+      "createCourse": "Create Course",
+      "stats": {
+        "totalSales": "Total Sales",
+        "enrolledStudents": "Enrolled Students",
+        "courses": "Courses"
+      }
+    },
+    "student": {
+      "meta": {
+        "title": "Student Dashboard | EduFlow",
+        "description": "Track your learning progress on EduFlow."
+      },
+      "heading": "Your Learning",
+      "stats": {
+        "activeCourses": "Active Courses",
+        "completed": "Completed",
+        "hoursStudied": "Hours Studied"
+      }
+    },
+    "admin": {
+      "meta": {
+        "title": "Admin Dashboard | EduFlow",
+        "description": "Manage users, reports and analytics on EduFlow."
+      },
+      "heading": "Platform Overview",
+      "stats": {
+        "users": "Users",
+        "activeCourses": "Active Courses",
+        "monthlyRevenue": "Monthly Revenue",
+        "reports": "Reports"
+      }
+    }
+  },
+
+  "notFound": {
+    "title": "404",
+    "message": "Oops! Page not found",
+    "returnHome": "Return to Home"
+  },
+
+  "ui": {
+    "common": {
+      "close": "Close"
+    },
+    "theme": {
+      "toggle": "Toggle theme",
+      "light": "Light",
+      "dark": "Dark",
+      "system": "System"
+    },
+    "pagination": {
+      "previous": "Previous",
+      "next": "Next",
+      "morePages": "More pages",
+      "aria": {
+        "prevPage": "Go to previous page",
+        "nextPage": "Go to next page"
+      }
+    },
+    "carousel": {
+      "prevSlide": "Previous slide",
+      "nextSlide": "Next slide"
+    },
+    "breadcrumb": {
+      "more": "More"
+    }
+  },
+
+  "courseCard": {
+    "by": "By {{instructor}}",
+    "view": "View"
   }
 }
