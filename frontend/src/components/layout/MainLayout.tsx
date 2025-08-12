@@ -63,8 +63,12 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
           <p>{t("footer.copyright", { year: new Date().getFullYear() })}</p>
           <div className="flex items-center gap-6">
             <Link to="/courses" className="hover:text-foreground transition-colors">{t("footer.browse")}</Link>
-            <Link to="/dashboard/teacher" className="hover:text-foreground transition-colors">{t("footer.teach")}</Link>
-            <Link to="/auth" className="hover:text-foreground transition-colors">{t("footer.login")}</Link>
+            {isAuthenticated && user?.role !== 'student' && (
+              <Link to="/dashboard/teacher" className="hover:text-foreground transition-colors">{t("footer.teach")}</Link>
+            )}
+            {!isAuthenticated && (
+              <Link to="/auth" className="hover:text-foreground transition-colors">{t("footer.login")}</Link>
+            )}
           </div>
         </div>
       </footer>
