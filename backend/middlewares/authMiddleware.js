@@ -1,6 +1,7 @@
 // backend/middleware/authMiddleware.js
 const jwt = require('jsonwebtoken');
-const User = require('@/models/User');
+const User = require('../models/User');
+const { createSessionInfo } = require('../utils/sessionUtils');
 
 const protect = async (req, res, next) => {
     let token;
@@ -13,6 +14,11 @@ const protect = async (req, res, next) => {
 
             if (!req.user) {
                 return res.status(404).json({ message: 'User not found' });
+            }
+
+            // Add session info to request for tracking
+            if (decoded.sessionId) {
+                req.sessionId = decoded.sessionId;
             }
 
             next();
