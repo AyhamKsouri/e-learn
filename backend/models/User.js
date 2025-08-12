@@ -27,14 +27,59 @@ const userSchema = new mongoose.Schema({
         enum: ['teacher','student', 'admin'],
         default: 'student',
     },
+    // Profile Information
+    profileImage: {
+        type: String,
+        default: '',
+    },
+    // Security Settings
+    twoFactorEnabled: {
+        type: Boolean,
+        default: false,
+    },
+    activeSessions: [{
+        sessionId: String,
+        deviceInfo: String,
+        ipAddress: String,
+        lastActive: Date,
+        createdAt: { type: Date, default: Date.now }
+    }],
+    // User Preferences
+    preferences: {
+        language: {
+            type: String,
+            enum: ['en', 'fr', 'es', 'ar'],
+            default: 'en',
+        },
+        theme: {
+            type: String,
+            enum: ['light', 'dark', 'system'],
+            default: 'system',
+        },
+        emailNotifications: {
+            type: Boolean,
+            default: true,
+        },
+        courseRecommendations: {
+            type: Boolean,
+            default: true,
+        },
+    },
+    // Course Management
     enrolledCourses: [{
         course: { type: mongoose.Schema.Types.ObjectId, ref: 'Course' },
-        progress: { type: Number, default: 0 }
+        progress: { type: Number, default: 0 },
+        enrolledAt: { type: Date, default: Date.now },
     }],
     completedCourses: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Course',
+        course: { type: mongoose.Schema.Types.ObjectId, ref: 'Course' },
+        completedAt: { type: Date, default: Date.now },
     }],
+    // Timestamps
+    lastUpdated: {
+        type: Date,
+        default: Date.now,
+    },
 }, {
     timestamps: true,
 });
