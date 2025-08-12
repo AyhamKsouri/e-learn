@@ -34,16 +34,8 @@ export default function Auth() {
         // Store token in localStorage
         localStorage.setItem('token', res.token);
         
-        // Login user through context
-        login({
-          _id: res._id,
-          name: res.name,
-          email: res.email,
-          role: res.role,
-          enrolledCourses: res.enrolledCourses || [],
-          completedCourses: res.completedCourses || [],
-          createdAt: res.createdAt || new Date().toISOString()
-        });
+        // Login user through context with complete user data
+        login(res, res.token);
         
         toast({ title: "Signed in successfully", description: `Welcome back ${res.name}` });
         
@@ -86,16 +78,8 @@ export default function Auth() {
         // Store token in localStorage
         localStorage.setItem('token', res.token);
         
-        // Login user through context
-        login({
-          _id: res._id,
-          name: res.name,
-          email: res.email,
-          role: res.role,
-          enrolledCourses: res.enrolledCourses || [],
-          completedCourses: res.completedCourses || [],
-          createdAt: res.createdAt || new Date().toISOString()
-        });
+        // Login user through context with complete user data
+        login(res, res.token);
         
         toast({ title: "Account created", description: `Welcome ${res.name}` });
         

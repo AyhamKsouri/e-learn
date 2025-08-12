@@ -7,18 +7,42 @@ interface UserData {
   role: string;
 }
 
+interface UserPreferences {
+  language: 'en' | 'fr' ;
+  theme: 'light' | 'dark' | 'system';
+  emailNotifications: boolean;
+  courseRecommendations: boolean;
+}
+
+interface UserSession {
+  sessionId: string;
+  deviceInfo: string;
+  ipAddress: string;
+  lastActive: string;
+  createdAt: string;
+}
+
 interface AuthResponse {
   _id: string;
   name: string;
   email: string;
   role: 'student' | 'teacher' | 'admin';
-  token: string;
+  profileImage?: string;
+  preferences: UserPreferences;
+  twoFactorEnabled: boolean;
   enrolledCourses?: Array<{
     course: string;
     progress: number;
+    enrolledAt: string;
   }>;
-  completedCourses?: string[];
+  completedCourses?: Array<{
+    course: string;
+    completedAt: string;
+  }>;
+  activeSessions?: UserSession[];
   createdAt: string;
+  lastUpdated: string;
+  token: string;
   message?: string;
 }
 

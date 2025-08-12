@@ -295,7 +295,10 @@
         "enable": "Activer 2FA",
         "enabled": "L'authentification à deux facteurs est activée",
         "disabled": "Sécurisez votre compte avec l'authentification à deux facteurs",
-        "status": "Activé"
+        "status": "Activé",
+        "enabledToast": "Authentification à deux facteurs activée",
+        "disabledToast": "Authentification à deux facteurs désactivée",
+        "toggleError": "Échec du basculement de l'authentification à deux facteurs"
       },
       "sessions": {
         "title": "Gestion des Sessions",
@@ -327,7 +330,9 @@
           "french": "Français",
           "spanish": "Español",
           "arabic": "العربية"
-        }
+        },
+        "updateSuccess": "Langue mise à jour avec succès",
+        "updateError": "Échec de la mise à jour de la langue"
       },
       "display": {
         "title": "Affichage",
@@ -339,7 +344,9 @@
             "light": "Clair",
             "dark": "Sombre",
             "system": "Système"
-          }
+          },
+          "updateSuccess": "Thème mis à jour avec succès",
+          "updateError": "Échec de la mise à jour du thème"
         }
       },
       "notifications": {
@@ -347,11 +354,15 @@
         "subtitle": "Contrôlez les notifications que vous recevez",
         "email": {
           "label": "Notifications par Email",
-          "description": "Recevez des mises à jour sur les cours et la progression par email"
+          "description": "Recevez des mises à jour sur les cours et la progression par email",
+          "updateSuccess": "Préférences de notification par email mises à jour",
+          "updateError": "Échec de la mise à jour des préférences de notification par email"
         },
         "recommendations": {
           "label": "Recommandations de Cours",
-          "description": "Obtenez des recommandations de cours personnalisées"
+          "description": "Obtenez des recommandations de cours personnalisées",
+          "updateSuccess": "Préférences de recommandation de cours mises à jour",
+          "updateError": "Échec de la mise à jour des préférences de recommandation de cours"
         }
       }
     },

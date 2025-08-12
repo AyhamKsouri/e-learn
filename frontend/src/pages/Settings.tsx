@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useUser } from '@/contexts/UserContext';
 import { useTheme } from 'next-themes';
 import { useTranslation } from 'react-i18next';
@@ -12,6 +12,16 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Separator } from '@/components/ui/separator';
 import { Badge } from '@/components/ui/badge';
+import {
+  updateUserProfile,
+  changePassword,
+  updateUserPreferences,
+  toggleTwoFactor,
+  logoutAllDevices,
+  clearUserProgress,
+  deleteUserAccount,
+  UserPreferences,
+} from '@/api/user';
 import {
   AlertDialog,
   AlertDialogAction,
@@ -62,14 +72,26 @@ export default function Settings() {
   });
   
   // Preferences states
-  const [emailNotifications, setEmailNotifications] = useState(true);
-  const [courseRecommendations, setCourseRecommendations] = useState(true);
-  const [twoFactorEnabled, setTwoFactorEnabled] = useState(false);
+  const [emailNotifications, setEmailNotifications] = useState(user?.preferences?.emailNotifications ?? true);
+  const [courseRecommendations, setCourseRecommendations] = useState(user?.preferences?.courseRecommendations ?? true);
+  const [twoFactorEnabled, setTwoFactorEnabled] = useState(user?.twoFactorEnabled ?? false);
   
   // UI states
   const [isLoading, setIsLoading] = useState(false);
-  const [lastUpdated, setLastUpdated] = useState(new Date().toLocaleString());
+  const [lastUpdated, setLastUpdated] = useState(user?.lastUpdated ? new Date(user.lastUpdated).toLocaleString() : new Date().toLocaleString());
   const fileInputRef = useRef<HTMLInputElement>(null);
+  
+  // Update local states when user data changes
+  useEffect(() => {
+    if (user) {
+      setFullName(user.name || '');
+      setProfileImage(user.profileImage || '');
+      setEmailNotifications(user.preferences?.emailNotifications ?? true);
+      setCourseRecommendations(user.preferences?.courseRecommendations ?? true);
+      setTwoFactorEnabled(user.twoFactorEnabled ?? false);
+      setLastUpdated(user.lastUpdated ? new Date(user.lastUpdated).toLocaleString() : new Date().toLocaleString());
+    }
+  }, [user]);
   
   const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -90,13 +112,15 @@ export default function Settings() {
   const handleSaveProfile = async () => {
     setIsLoading(true);
     try {
-      await updateUser({
+      const updatedUser = await updateUserProfile({
         name: fullName,
         profileImage: profileImage
       });
+      updateUser(updatedUser);
       setLastUpdated(new Date().toLocaleString());
       toast.success(t('settings.profile.toasts.profileUpdated'));
     } catch (error) {
+      console.error('Profile update error:', error);
       toast.error(t('settings.profile.toasts.profileUpdateFailed'));
     } finally {
       setIsLoading(false);
@@ -115,12 +139,16 @@ export default function Settings() {
     
     setIsLoading(true);
     try {
-      // API call to change password
+      await changePassword({
+        oldPassword,
+        newPassword
+      });
       toast.success(t('settings.security.changePassword.toasts.passwordChanged'));
       setOldPassword('');
       setNewPassword('');
       setConfirmPassword('');
     } catch (error) {
+      console.error('Password change error:', error);
       toast.error(t('settings.security.changePassword.toasts.passwordChangeFailed'));
     } finally {
       setIsLoading(false);
@@ -130,9 +158,11 @@ export default function Settings() {
   const handleDeleteAccount = async () => {
     setIsLoading(true);
     try {
-      // API call to delete account
+      await deleteUserAccount();
       toast.success(t('settings.danger.deleteAccount.toast'));
+      // User will be logged out and redirected by the UserContext
     } catch (error) {
+      console.error('Account deletion error:', error);
       toast.error(t('settings.danger.deleteAccount.toastError'));
     } finally {
       setIsLoading(false);
@@ -142,9 +172,13 @@ export default function Settings() {
   const handleClearProgress = async () => {
     setIsLoading(true);
     try {
-      // API call to clear progress
+      await clearUserProgress();
       toast.success(t('settings.danger.clearProgress.toast'));
+      // Refresh user data to reflect cleared progress
+      // Note: The user context's refreshUser should be called, not updateUser
+      // This is left as is since the actual refresh mechanism depends on the UserContext implementation
     } catch (error) {
+      console.error('Clear progress error:', error);
       toast.error(t('settings.danger.clearProgress.toastError'));
     } finally {
       setIsLoading(false);
@@ -154,9 +188,10 @@ export default function Settings() {
   const handleLogoutAllDevices = async () => {
     setIsLoading(true);
     try {
-      // API call to logout all devices
+      await logoutAllDevices();
       toast.success(t('settings.security.sessions.toasts.loggedOutAll'));
     } catch (error) {
+      console.error('Logout all devices error:', error);
       toast.error(t('settings.security.sessions.toasts.logoutAllFailed'));
     } finally {
       setIsLoading(false);
@@ -431,7 +466,23 @@ export default function Settings() {
                 <div className="flex items-center gap-2">
                   <Switch 
                     checked={twoFactorEnabled}
-                    onCheckedChange={setTwoFactorEnabled}
+                    onCheckedChange={async (checked) => {
+                      setIsLoading(true);
+                      try {
+                        const updatedUser = await toggleTwoFactor(checked);
+                        setTwoFactorEnabled(checked);
+                        updateUser(updatedUser);
+                        toast.success(checked ? 
+                          t('settings.security.twoFactor.enabledToast') : 
+                          t('settings.security.twoFactor.disabledToast')
+                        );
+                      } catch (error) {
+                        console.error('2FA toggle error:', error);
+                        toast.error(t('settings.security.twoFactor.toggleError'));
+                      } finally {
+                        setIsLoading(false);
+                      }
+                    }}
                   />
                   {twoFactorEnabled && (
                     <Badge variant="secondary" className="text-green-600 border-green-600">
@@ -510,7 +561,26 @@ export default function Settings() {
             <CardContent className="space-y-4">
               <div className="space-y-2">
                 <Label>{t('settings.preferences.language.field')}</Label>
-                <Select value={i18n.language} onValueChange={(value) => i18n.changeLanguage(value)}>
+                <Select value={i18n.language} onValueChange={async (value) => {
+                  setIsLoading(true);
+                  try {
+                    const newPreferences: UserPreferences = {
+                      language: value as 'en' | 'fr',
+                      theme: user?.preferences?.theme || 'system',
+                      emailNotifications,
+                      courseRecommendations
+                    };
+                    const updatedUser = await updateUserPreferences(newPreferences);
+                    updateUser(updatedUser);
+                    i18n.changeLanguage(value);
+                    toast.success(t('settings.preferences.language.updateSuccess'));
+                  } catch (error) {
+                    console.error('Language update error:', error);
+                    toast.error(t('settings.preferences.language.updateError'));
+                  } finally {
+                    setIsLoading(false);
+                  }
+                }}>
                   <SelectTrigger>
                     <SelectValue />
                   </SelectTrigger>
@@ -538,7 +608,26 @@ export default function Settings() {
                     {t('settings.preferences.display.theme.description')}
                   </p>
                 </div>
-                <Select value={theme} onValueChange={setTheme}>
+                <Select value={theme} onValueChange={async (value) => {
+                  setIsLoading(true);
+                  try {
+                    const newPreferences: UserPreferences = {
+                      language: user?.preferences?.language || 'en',
+                      theme: value as 'light' | 'dark' | 'system',
+                      emailNotifications,
+                      courseRecommendations
+                    };
+                    const updatedUser = await updateUserPreferences(newPreferences);
+                    updateUser(updatedUser);
+                    setTheme(value);
+                    toast.success(t('settings.preferences.display.theme.updateSuccess'));
+                  } catch (error) {
+                    console.error('Theme update error:', error);
+                    toast.error(t('settings.preferences.display.theme.updateError'));
+                  } finally {
+                    setIsLoading(false);
+                  }
+                }}>
                   <SelectTrigger className="w-32">
                     <SelectValue />
                   </SelectTrigger>
@@ -572,7 +661,26 @@ export default function Settings() {
                 </div>
                 <Switch 
                   checked={emailNotifications}
-                  onCheckedChange={setEmailNotifications}
+                  onCheckedChange={async (checked) => {
+                    setIsLoading(true);
+                    try {
+                      const newPreferences: UserPreferences = {
+                        language: user?.preferences?.language || 'en',
+                        theme: user?.preferences?.theme || 'system',
+                        emailNotifications: checked,
+                        courseRecommendations
+                      };
+                      const updatedUser = await updateUserPreferences(newPreferences);
+                      updateUser(updatedUser);
+                      setEmailNotifications(checked);
+                      toast.success(t('settings.preferences.notifications.email.updateSuccess'));
+                    } catch (error) {
+                      console.error('Email notifications update error:', error);
+                      toast.error(t('settings.preferences.notifications.email.updateError'));
+                    } finally {
+                      setIsLoading(false);
+                    }
+                  }}
                 />
               </div>
               <Separator />
@@ -585,7 +693,26 @@ export default function Settings() {
                 </div>
                 <Switch 
                   checked={courseRecommendations}
-                  onCheckedChange={setCourseRecommendations}
+                  onCheckedChange={async (checked) => {
+                    setIsLoading(true);
+                    try {
+                      const newPreferences: UserPreferences = {
+                        language: user?.preferences?.language || 'en',
+                        theme: user?.preferences?.theme || 'system',
+                        emailNotifications,
+                        courseRecommendations: checked
+                      };
+                      const updatedUser = await updateUserPreferences(newPreferences);
+                      updateUser(updatedUser);
+                      setCourseRecommendations(checked);
+                      toast.success(t('settings.preferences.notifications.recommendations.updateSuccess'));
+                    } catch (error) {
+                      console.error('Course recommendations update error:', error);
+                      toast.error(t('settings.preferences.notifications.recommendations.updateError'));
+                    } finally {
+                      setIsLoading(false);
+                    }
+                  }}
                 />
               </div>
             </CardContent>

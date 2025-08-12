@@ -1,24 +1,13 @@
-import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
-
-export interface User {
-  _id: string;
-  name: string;
-  email: string;
-  role: 'student' | 'teacher' | 'admin';
-  enrolledCourses?: Array<{
-    course: string;
-    progress: number;
-  }>;
-  completedCourses?: string[];
-  createdAt: string;
-}
+import React, { createContext, useContext, useState, useEffect, type ReactNode } from 'react';
+import { getCurrentUser, type User } from '@/api/user';
 
 interface UserContextType {
   user: User | null;
   isLoading: boolean;
-  login: (userData: User) => void;
+  login: (userData: User, token: string) => void;
   logout: () => void;
-  updateUser: (updates: Partial<User>) => void;
+  updateUser: (updates: Partial<User>) => Promise<void>;
+  refreshUser: () => Promise<void>;
   isAuthenticated: boolean;
 }
 
@@ -40,18 +29,30 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
+  // Refresh user data from API
+  const refreshUser = async () => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      try {
+        const userData = await getCurrentUser();
+        setUser(userData);
+        localStorage.setItem('user', JSON.stringify(userData));
+      } catch (error) {
+        console.error('Failed to refresh user data:', error);
+        // If token is invalid, clear auth state
+        logout();
+      }
+    }
+  };
+
   // Check for existing token on app load
   useEffect(() => {
     const checkAuth = async () => {
       const token = localStorage.getItem('token');
       if (token) {
         try {
-          // TODO: Verify token with backend
-          // For now, we'll just check if we have user data in localStorage
-          const userData = localStorage.getItem('user');
-          if (userData) {
-            setUser(JSON.parse(userData));
-          }
+          // Verify token and get fresh user data from backend
+          await refreshUser();
         } catch (error) {
           console.error('Token verification failed:', error);
           localStorage.removeItem('token');
@@ -64,10 +65,10 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
     checkAuth();
   }, []);
 
-  const login = (userData: User) => {
+  const login = (userData: User, token: string) => {
     setUser(userData);
     localStorage.setItem('user', JSON.stringify(userData));
-    // Token is already stored by the auth service
+    localStorage.setItem('token', token);
   };
 
   const logout = () => {
@@ -76,7 +77,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
     localStorage.removeItem('user');
   };
 
-  const updateUser = (updates: Partial<User>) => {
+  const updateUser = async (updates: Partial<User>) => {
     if (user) {
       const updatedUser = { ...user, ...updates };
       setUser(updatedUser);
@@ -90,6 +91,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
     login,
     logout,
     updateUser,
+    refreshUser,
     isAuthenticated: !!user,
   };
 

@@ -295,7 +295,10 @@
         "enable": "Enable 2FA",
         "enabled": "Two-factor authentication is enabled",
         "disabled": "Secure your account with two-factor authentication",
-        "status": "Enabled"
+        "status": "Enabled",
+        "enabledToast": "Two-factor authentication enabled",
+        "disabledToast": "Two-factor authentication disabled",
+        "toggleError": "Failed to toggle two-factor authentication"
       },
       "sessions": {
         "title": "Session Management",
@@ -327,7 +330,9 @@
           "french": "Français",
           "spanish": "Español",
           "arabic": "العربية"
-        }
+        },
+        "updateSuccess": "Language updated successfully",
+        "updateError": "Failed to update language"
       },
       "display": {
         "title": "Display",
@@ -339,7 +344,9 @@
             "light": "Light",
             "dark": "Dark",
             "system": "System"
-          }
+          },
+          "updateSuccess": "Theme updated successfully",
+          "updateError": "Failed to update theme"
         }
       },
       "notifications": {
@@ -347,11 +354,15 @@
         "subtitle": "Control what notifications you receive",
         "email": {
           "label": "Email Notifications",
-          "description": "Receive updates about courses and progress via email"
+          "description": "Receive updates about courses and progress via email",
+          "updateSuccess": "Email notification preferences updated",
+          "updateError": "Failed to update email notification preferences"
         },
         "recommendations": {
           "label": "Course Recommendations",
-          "description": "Get personalized course recommendations"
+          "description": "Get personalized course recommendations",
+          "updateSuccess": "Course recommendation preferences updated",
+          "updateError": "Failed to update course recommendation preferences"
         }
       }
     },
