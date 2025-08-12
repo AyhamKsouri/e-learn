@@ -20,7 +20,7 @@ import {
   logoutAllDevices,
   clearUserProgress,
   deleteUserAccount,
-  UserPreferences,
+ type  UserPreferences,
 } from '@/api/user';
 import {
   AlertDialog,
@@ -112,11 +112,12 @@ export default function Settings() {
   const handleSaveProfile = async () => {
     setIsLoading(true);
     try {
-      const updatedUser = await updateUserProfile({
+      const response = await updateUserProfile({
         name: fullName,
         profileImage: profileImage
       });
-      updateUser(updatedUser);
+      // Extract user from API response and update context
+      updateUser(response.user);
       setLastUpdated(new Date().toLocaleString());
       toast.success(t('settings.profile.toasts.profileUpdated'));
     } catch (error) {
@@ -469,9 +470,10 @@ export default function Settings() {
                     onCheckedChange={async (checked) => {
                       setIsLoading(true);
                       try {
-                        const updatedUser = await toggleTwoFactor(checked);
+                        const response = await toggleTwoFactor(checked);
                         setTwoFactorEnabled(checked);
-                        updateUser(updatedUser);
+                        // Update only the twoFactorEnabled field
+                        updateUser({ twoFactorEnabled: response.twoFactorEnabled });
                         toast.success(checked ? 
                           t('settings.security.twoFactor.enabledToast') : 
                           t('settings.security.twoFactor.disabledToast')
@@ -570,8 +572,9 @@ export default function Settings() {
                       emailNotifications,
                       courseRecommendations
                     };
-                    const updatedUser = await updateUserPreferences(newPreferences);
-                    updateUser(updatedUser);
+                    const response = await updateUserPreferences(newPreferences);
+                    // Update user preferences in context
+                    updateUser({ preferences: response.preferences });
                     i18n.changeLanguage(value);
                     toast.success(t('settings.preferences.language.updateSuccess'));
                   } catch (error) {
@@ -617,8 +620,9 @@ export default function Settings() {
                       emailNotifications,
                       courseRecommendations
                     };
-                    const updatedUser = await updateUserPreferences(newPreferences);
-                    updateUser(updatedUser);
+                    const response = await updateUserPreferences(newPreferences);
+                    // Update user preferences in context
+                    updateUser({ preferences: response.preferences });
                     setTheme(value);
                     toast.success(t('settings.preferences.display.theme.updateSuccess'));
                   } catch (error) {
@@ -670,8 +674,9 @@ export default function Settings() {
                         emailNotifications: checked,
                         courseRecommendations
                       };
-                      const updatedUser = await updateUserPreferences(newPreferences);
-                      updateUser(updatedUser);
+                      const response = await updateUserPreferences(newPreferences);
+                      // Update user preferences in context
+                      updateUser({ preferences: response.preferences });
                       setEmailNotifications(checked);
                       toast.success(t('settings.preferences.notifications.email.updateSuccess'));
                     } catch (error) {
@@ -702,8 +707,9 @@ export default function Settings() {
                         emailNotifications,
                         courseRecommendations: checked
                       };
-                      const updatedUser = await updateUserPreferences(newPreferences);
-                      updateUser(updatedUser);
+                      const response = await updateUserPreferences(newPreferences);
+                      // Update user preferences in context
+                      updateUser({ preferences: response.preferences });
                       setCourseRecommendations(checked);
                       toast.success(t('settings.preferences.notifications.recommendations.updateSuccess'));
                     } catch (error) {

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useUser } from '@/contexts/UserContext';
 import { Button } from '@/components/ui/button';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -48,9 +49,12 @@ export default function StudentProfileDropdown() {
           className="flex items-center gap-2 px-3 py-2 hover:bg-accent"
         >
           {/* Student Avatar */}
-          <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary font-semibold text-sm">
-            {user.name.charAt(0).toUpperCase()}
-          </div>
+          <Avatar className="w-8 h-8">
+            <AvatarImage src={user.profileImage} alt={user.name} />
+            <AvatarFallback className="bg-primary/10 text-primary font-semibold text-sm">
+              {user.name.charAt(0).toUpperCase()}
+            </AvatarFallback>
+          </Avatar>
           
           {/* Student Info */}
           <div className="hidden md:block text-left">
@@ -65,10 +69,13 @@ export default function StudentProfileDropdown() {
       <DropdownMenuContent align="end" className="w-80 p-0">
         {/* Header with student info */}
         <DropdownMenuLabel className="p-4 border-b">
-          <div className="flex items-center gap-3">
-            <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary font-semibold text-lg">
-              {user.name.charAt(0).toUpperCase()}
-            </div>
+        <div className="flex items-center gap-3">
+            <Avatar className="w-12 h-12">
+              <AvatarImage src={user.profileImage} alt={user.name} />
+              <AvatarFallback className="bg-primary/10 text-primary font-semibold text-lg">
+                {user.name.charAt(0).toUpperCase()}
+              </AvatarFallback>
+            </Avatar>
             <div>
               <div className="font-semibold">{user.name}</div>
               <div className="text-sm text-muted-foreground">{user.email}</div>

@@ -6,7 +6,7 @@ interface UserContextType {
   isLoading: boolean;
   login: (userData: User, token: string) => void;
   logout: () => void;
-  updateUser: (updates: Partial<User>) => Promise<void>;
+  updateUser: (updates: Partial<User> | User) => Promise<void>;
   refreshUser: () => Promise<void>;
   isAuthenticated: boolean;
 }
@@ -77,9 +77,10 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
     localStorage.removeItem('user');
   };
 
-  const updateUser = async (updates: Partial<User>) => {
+  const updateUser = async (updates: Partial<User> | User) => {
     if (user) {
-      const updatedUser = { ...user, ...updates };
+      // If updates is a full User object, use it directly; otherwise merge with existing user
+      const updatedUser = '_id' in updates ? updates as User : { ...user, ...updates };
       setUser(updatedUser);
       localStorage.setItem('user', JSON.stringify(updatedUser));
     }
