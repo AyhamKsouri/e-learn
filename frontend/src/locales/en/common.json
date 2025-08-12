@@ -234,5 +234,152 @@
   "courseCard": {
     "by": "By {{instructor}}",
     "view": "View"
+  },
+
+  "settings": {
+    "title": "Settings",
+    "subtitle": "Manage your account settings and preferences",
+    "tabs": {
+      "profile": "Profile",
+      "security": "Security",
+      "preferences": "Preferences",
+      "danger": "Danger Zone"
+    },
+    "profile": {
+      "title": "Profile Information",
+      "subtitle": "Update your personal information and profile picture",
+      "fields": {
+        "fullName": "Full Name",
+        "fullNamePlaceholder": "Enter your full name",
+        "email": "Email Address",
+        "role": "Role",
+        "lastUpdated": "Last Updated",
+        "profilePicture": "Profile Picture"
+      },
+      "actions": {
+        "uploadNew": "Upload New",
+        "remove": "Remove",
+        "saveChanges": "Save Changes",
+        "saving": "Saving..."
+      },
+      "hints": {
+        "imageFormat": "JPG, PNG or WEBP. Max 5MB.",
+        "readOnly": "Read-only"
+      },
+      "toasts": {
+        "profileUpdated": "Profile updated successfully",
+        "profileUpdateFailed": "Failed to update profile",
+        "imageTooLarge": "Image size should be less than 5MB"
+      }
+    },
+    "security": {
+      "changePassword": {
+        "title": "Change Password",
+        "subtitle": "Update your password to keep your account secure",
+        "fields": {
+          "currentPassword": "Current Password",
+          "newPassword": "New Password",
+          "confirmPassword": "Confirm New Password"
+        },
+        "action": "Update Password",
+        "toasts": {
+          "passwordChanged": "Password changed successfully",
+          "passwordChangeFailed": "Failed to change password",
+          "passwordsNoMatch": "New passwords do not match",
+          "passwordTooShort": "Password must be at least 8 characters long"
+        }
+      },
+      "twoFactor": {
+        "title": "Two-Factor Authentication",
+        "subtitle": "Add an extra layer of security to your account",
+        "enable": "Enable 2FA",
+        "enabled": "Two-factor authentication is enabled",
+        "disabled": "Secure your account with two-factor authentication",
+        "status": "Enabled"
+      },
+      "sessions": {
+        "title": "Session Management",
+        "subtitle": "Manage your active sessions and devices",
+        "currentSession": "Current Session",
+        "mobileDevice": "Mobile Device",
+        "lastSeen": "Last seen 2 hours ago",
+        "deviceInfo": "Windows • Chrome",
+        "status": {
+          "active": "Active",
+          "inactive": "Inactive"
+        },
+        "actions": {
+          "logoutAll": "Logout All Other Devices"
+        },
+        "toasts": {
+          "loggedOutAll": "Logged out from all devices",
+          "logoutAllFailed": "Failed to logout from all devices"
+        }
+      }
+    },
+    "preferences": {
+      "language": {
+        "title": "Language & Region",
+        "subtitle": "Choose your preferred language and region settings",
+        "field": "Language",
+        "options": {
+          "english": "English",
+          "french": "Français",
+          "spanish": "Español",
+          "arabic": "العربية"
+        }
+      },
+      "display": {
+        "title": "Display",
+        "subtitle": "Customize how the application appears",
+        "theme": {
+          "label": "Theme",
+          "description": "Choose between light and dark mode",
+          "options": {
+            "light": "Light",
+            "dark": "Dark",
+            "system": "System"
+          }
+        }
+      },
+      "notifications": {
+        "title": "Notifications",
+        "subtitle": "Control what notifications you receive",
+        "email": {
+          "label": "Email Notifications",
+          "description": "Receive updates about courses and progress via email"
+        },
+        "recommendations": {
+          "label": "Course Recommendations",
+          "description": "Get personalized course recommendations"
+        }
+      }
+    },
+    "danger": {
+      "title": "Danger Zone",
+      "subtitle": "Irreversible and destructive actions",
+      "clearProgress": {
+        "title": "Clear All Progress",
+        "description": "Remove all your course progress and achievements",
+        "action": "Clear Progress",
+        "confirmTitle": "Are you sure?",
+        "confirmDescription": "This will permanently delete all your course progress, achievements, and learning history. This action cannot be undone.",
+        "confirmAction": "Clear Progress",
+        "cancel": "Cancel",
+        "toast": "Progress cleared successfully",
+        "toastError": "Failed to clear progress"
+      },
+      "deleteAccount": {
+        "title": "Delete Account",
+        "description": "Permanently delete your account and all associated data",
+        "action": "Delete Account",
+        "confirmTitle": "Delete Account",
+        "confirmDescription": "This will permanently delete your account, including all courses, progress, and personal data. This action cannot be undone and you will not be able to recover your account.",
+        "confirmAction": "Delete Account",
+        "cancel": "Cancel",
+        "toast": "Account deletion initiated",
+        "toastError": "Failed to delete account"
+      }
+    }
   }
 }

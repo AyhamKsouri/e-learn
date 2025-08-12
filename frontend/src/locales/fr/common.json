@@ -234,5 +234,152 @@
   "courseCard": {
     "by": "Par {{instructor}}",
     "view": "Voir"
+  },
+
+  "settings": {
+    "title": "Paramètres",
+    "subtitle": "Gérez les paramètres de votre compte et vos préférences",
+    "tabs": {
+      "profile": "Profil",
+      "security": "Sécurité",
+      "preferences": "Préférences",
+      "danger": "Zone de Danger"
+    },
+    "profile": {
+      "title": "Informations du Profil",
+      "subtitle": "Mettez à jour vos informations personnelles et votre photo de profil",
+      "fields": {
+        "fullName": "Nom Complet",
+        "fullNamePlaceholder": "Entrez votre nom complet",
+        "email": "Adresse Email",
+        "role": "Rôle",
+        "lastUpdated": "Dernière Mise à Jour",
+        "profilePicture": "Photo de Profil"
+      },
+      "actions": {
+        "uploadNew": "Télécharger Nouveau",
+        "remove": "Supprimer",
+        "saveChanges": "Sauvegarder",
+        "saving": "Sauvegarde..."
+      },
+      "hints": {
+        "imageFormat": "JPG, PNG ou WEBP. Max 5MB.",
+        "readOnly": "Lecture seule"
+      },
+      "toasts": {
+        "profileUpdated": "Profil mis à jour avec succès",
+        "profileUpdateFailed": "Échec de la mise à jour du profil",
+        "imageTooLarge": "La taille de l'image doit être inférieure à 5MB"
+      }
+    },
+    "security": {
+      "changePassword": {
+        "title": "Changer le Mot de Passe",
+        "subtitle": "Mettez à jour votre mot de passe pour sécuriser votre compte",
+        "fields": {
+          "currentPassword": "Mot de Passe Actuel",
+          "newPassword": "Nouveau Mot de Passe",
+          "confirmPassword": "Confirmer le Nouveau Mot de Passe"
+        },
+        "action": "Mettre à Jour le Mot de Passe",
+        "toasts": {
+          "passwordChanged": "Mot de passe modifié avec succès",
+          "passwordChangeFailed": "Échec du changement de mot de passe",
+          "passwordsNoMatch": "Les nouveaux mots de passe ne correspondent pas",
+          "passwordTooShort": "Le mot de passe doit contenir au moins 8 caractères"
+        }
+      },
+      "twoFactor": {
+        "title": "Authentification à Deux Facteurs",
+        "subtitle": "Ajoutez une couche de sécurité supplémentaire à votre compte",
+        "enable": "Activer 2FA",
+        "enabled": "L'authentification à deux facteurs est activée",
+        "disabled": "Sécurisez votre compte avec l'authentification à deux facteurs",
+        "status": "Activé"
+      },
+      "sessions": {
+        "title": "Gestion des Sessions",
+        "subtitle": "Gérez vos sessions actives et appareils",
+        "currentSession": "Session Actuelle",
+        "mobileDevice": "Appareil Mobile",
+        "lastSeen": "Vu il y a 2 heures",
+        "deviceInfo": "Windows • Chrome",
+        "status": {
+          "active": "Actif",
+          "inactive": "Inactif"
+        },
+        "actions": {
+          "logoutAll": "Déconnecter Tous les Autres Appareils"
+        },
+        "toasts": {
+          "loggedOutAll": "Déconnecté de tous les appareils",
+          "logoutAllFailed": "Échec de la déconnexion de tous les appareils"
+        }
+      }
+    },
+    "preferences": {
+      "language": {
+        "title": "Langue et Région",
+        "subtitle": "Choisissez votre langue et paramètres régionaux préférés",
+        "field": "Langue",
+        "options": {
+          "english": "English",
+          "french": "Français",
+          "spanish": "Español",
+          "arabic": "العربية"
+        }
+      },
+      "display": {
+        "title": "Affichage",
+        "subtitle": "Personnalisez l'apparence de l'application",
+        "theme": {
+          "label": "Thème",
+          "description": "Choisissez entre le mode clair et sombre",
+          "options": {
+            "light": "Clair",
+            "dark": "Sombre",
+            "system": "Système"
+          }
+        }
+      },
+      "notifications": {
+        "title": "Notifications",
+        "subtitle": "Contrôlez les notifications que vous recevez",
+        "email": {
+          "label": "Notifications par Email",
+          "description": "Recevez des mises à jour sur les cours et la progression par email"
+        },
+        "recommendations": {
+          "label": "Recommandations de Cours",
+          "description": "Obtenez des recommandations de cours personnalisées"
+        }
+      }
+    },
+    "danger": {
+      "title": "Zone de Danger",
+      "subtitle": "Actions irréversibles et destructrices",
+      "clearProgress": {
+        "title": "Effacer Toute la Progression",
+        "description": "Supprimez toute votre progression de cours et réalisations",
+        "action": "Effacer la Progression",
+        "confirmTitle": "Êtes-vous sûr ?",
+        "confirmDescription": "Ceci supprimera définitivement toute votre progression de cours, réalisations et historique d'apprentissage. Cette action ne peut pas être annulée.",
+        "confirmAction": "Effacer la Progression",
+        "cancel": "Annuler",
+        "toast": "Progression effacée avec succès",
+        "toastError": "Échec de l'effacement de la progression"
+      },
+      "deleteAccount": {
+        "title": "Supprimer le Compte",
+        "description": "Supprimez définitivement votre compte et toutes les données associées",
+        "action": "Supprimer le Compte",
+        "confirmTitle": "Supprimer le Compte",
+        "confirmDescription": "Ceci supprimera définitivement votre compte, incluant tous les cours, la progression et les données personnelles. Cette action ne peut pas être annulée et vous ne pourrez pas récupérer votre compte.",
+        "confirmAction": "Supprimer le Compte",
+        "cancel": "Annuler",
+        "toast": "Suppression du compte initiée",
+        "toastError": "Échec de la suppression du compte"
+      }
+    }
   }
 }
