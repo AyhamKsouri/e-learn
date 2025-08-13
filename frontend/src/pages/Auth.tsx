@@ -8,7 +8,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { toast } from "@/hooks/use-toast";
 import { useTranslation } from "react-i18next";
 import { useUser } from "@/contexts/UserContext";
-import { registerUser, loginUser } from "@/api/auth";
+import { registerUser, loginUser, type Login2FAResponse } from "@/api/auth";
 
 export default function Auth() {
   const [loading, setLoading] = useState(false);
@@ -30,25 +30,29 @@ export default function Auth() {
     try {
       setLoading(true);
       const res = await loginUser({ email: signinEmail, password: signinPassword });
-      if (res.token) {
-        // Store token in localStorage
-        localStorage.setItem('token', res.token);
-        
-        // Login user through context with complete user data
-        login(res, res.token);
-        
-        toast({ title: "Signed in successfully", description: `Welcome back ${res.name}` });
-        
-        // Redirect based on role
-        if (res.role === 'student') {
+
+      // If backend indicates 2FA is required, send user to verification page
+      if ((res as Login2FAResponse).requires2FA) {
+        const data = res as Login2FAResponse;
+        toast({ title: "Verification required", description: `We sent a code to ${data.email}` });
+        navigate('/verify-2fa', { state: { userId: data.userId, maskedEmail: data.email } });
+        return;
+      }
+
+      const full = res as any;
+      if (full.token) {
+        localStorage.setItem('token', full.token);
+        login(full, full.token);
+        toast({ title: "Signed in successfully", description: `Welcome back ${full.name}` });
+        if (full.role === 'student') {
           navigate('/dashboard/student');
-        } else if (res.role === 'teacher') {
+        } else if (full.role === 'teacher') {
           navigate('/dashboard/teacher');
-        } else if (res.role === 'admin') {
+        } else if (full.role === 'admin') {
           navigate('/dashboard/admin');
         }
       } else {
-        toast({ title: "Sign in failed", description: res.message || "Invalid credentials", variant: "destructive" });
+        toast({ title: "Sign in failed", description: full.message || "Invalid credentials", variant: "destructive" });
       }
     } catch (e: any) {
       toast({ title: "Error", description: e.message, variant: "destructive" });
@@ -75,15 +79,9 @@ export default function Auth() {
       });
 
       if (res.token) {
-        // Store token in localStorage
         localStorage.setItem('token', res.token);
-        
-        // Login user through context with complete user data
-        login(res, res.token);
-        
+        login(res as any, res.token);
         toast({ title: "Account created", description: `Welcome ${res.name}` });
-        
-        // Redirect based on role
         if (res.role === 'student') {
           navigate('/dashboard/student');
         } else if (res.role === 'teacher') {
@@ -92,7 +90,7 @@ export default function Auth() {
           navigate('/dashboard/admin');
         }
       } else {
-        toast({ title: "Sign up failed", description: res.message || "Could not create account", variant: "destructive" });
+        toast({ title: "Sign up failed", description: (res as any).message || "Could not create account", variant: "destructive" });
       }
     } catch (e: any) {
       toast({ title: "Error", description: e.message, variant: "destructive" });
