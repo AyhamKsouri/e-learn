@@ -244,6 +244,50 @@ const deleteUserAccount = async (userId) => {
     }
 };
 
+// Store password reset token (simple implementation - in production use Redis or separate collection)
+const storePasswordResetToken = async (userId, resetToken) => {
+    try {
+        // For now, we'll store it in memory (use Redis in production)
+        global.passwordResetTokens = global.passwordResetTokens || new Map();
+        
+        const tokenData = {
+            token: resetToken,
+            expiresAt: Date.now() + (60 * 60 * 1000), // 1 hour
+            userId: userId
+        };
+        
+        global.passwordResetTokens.set(userId, tokenData);
+        
+        return true;
+    } catch (error) {
+        throw new Error(`Error storing password reset token: ${error.message}`);
+    }
+};
+
+// Verify password reset token
+const verifyPasswordResetToken = async (token) => {
+    try {
+        global.passwordResetTokens = global.passwordResetTokens || new Map();
+        
+        // Find token in stored tokens
+        for (const [userId, tokenData] of global.passwordResetTokens) {
+            if (tokenData.token === token) {
+                // Check if token has expired
+                if (Date.now() > tokenData.expiresAt) {
+                    global.passwordResetTokens.delete(userId);
+                    throw new Error('Password reset token has expired');
+                }
+                
+                return { userId, valid: true };
+            }
+        }
+        
+        throw new Error('Invalid password reset token');
+    } catch (error) {
+        throw new Error(`Error verifying password reset token: ${error.message}`);
+    }
+};
+
 module.exports = {
     createUser,
     getAllUsers,
@@ -257,4 +301,6 @@ module.exports = {
     logoutAllDevices,
     clearUserProgress,
     deleteUserAccount,
+    storePasswordResetToken,
+    verifyPasswordResetToken,
 };

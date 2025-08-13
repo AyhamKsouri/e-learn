@@ -12,6 +12,11 @@ const {
     clearProgress,
     deleteAccount,
     getAllUsers,
+    verify2FA,
+    resend2FACode,
+    get2FAStatus,
+    requestPasswordReset,
+    sendTestEmail,
 } = require('../controllers/userController');
 const { protect, admin } = require('../middlewares/authMiddleware');
 const { upload, handleMulterError } = require('../middlewares/uploadMiddleware');
@@ -19,6 +24,17 @@ const { upload, handleMulterError } = require('../middlewares/uploadMiddleware')
 // Public routes
 router.post('/register', registerUser);
 router.post('/login', loginUser);
+
+// 2FA routes (public for verification)
+router.post('/verify-2fa', verify2FA);
+router.post('/resend-2fa', resend2FACode);
+router.get('/2fa-status/:userId', get2FAStatus);
+
+// Password reset (public)
+router.post('/request-password-reset', requestPasswordReset);
+
+// Development/testing routes
+router.post('/send-test-email', sendTestEmail);
 
 // Protected routes - User Profile Management
 router.get('/me', protect, getMe);

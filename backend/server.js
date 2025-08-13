@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 require('dotenv').config();
 const connectDB = require('./config/db');
+const emailService = require('./services/emailService');
 
 const app = express();
 connectDB();
@@ -21,7 +22,11 @@ app.use((err, req, res, next) => {
 });
 
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
+app.listen(PORT, async () => {
     console.log(`Server running on http://localhost:${PORT}`);
     console.log(`API endpoints available at http://localhost:${PORT}/api`);
+    
+    // Test email service connection
+    console.log('\n📧 Testing email service connection...');
+    await emailService.testConnection();
 });
