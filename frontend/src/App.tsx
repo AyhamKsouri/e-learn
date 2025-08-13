@@ -18,6 +18,7 @@ import TeacherDashboard from "./pages/dashboard/TeacherDashboard";
 import AdminDashboard from "./pages/dashboard/AdminDashboard";
 import Settings from "./pages/Settings";
 import NotFound from "./pages/NotFound";
+import Verify2FA from "./pages/Verify2FA";
 
 const queryClient = new QueryClient();
 
@@ -36,6 +37,7 @@ const App = () => (
                   <Route path="/courses" element={<Courses />} />
                   <Route path="/courses/:id" element={<CourseDetail />} />
                   <Route path="/auth" element={<Auth />} />
+                  <Route path="/verify-2fa" element={<Verify2FA />} />
                   <Route path="/about" element={<About />} />
                   <Route path="/dashboard/student" element={<StudentDashboard />} />
                   <Route path="/dashboard/teacher" element={<TeacherDashboard />} />
