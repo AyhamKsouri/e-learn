@@ -8,6 +8,7 @@ import { HelmetProvider } from "react-helmet-async";
 import ThemeProvider from "@/providers/ThemeProvider";
 import { UserProvider } from "@/contexts/UserContext";
 import MainLayout from "@/components/layout/MainLayout";
+
 import Index from "./pages/Index";
 import Courses from "./pages/Courses";
 import CourseDetail from "./pages/CourseDetail";
@@ -15,6 +16,7 @@ import Auth from "./pages/Auth";
 import About from "./pages/about";
 import StudentDashboard from "./pages/dashboard/StudentDashboard";
 import TeacherDashboard from "./pages/dashboard/TeacherDashboard";
+import CreateCourse from "./pages/CreateCourse";
 import AdminDashboard from "./pages/dashboard/AdminDashboard";
 import Settings from "./pages/Settings";
 import NotFound from "./pages/NotFound";
@@ -33,17 +35,22 @@ const App = () => (
             <BrowserRouter>
               <MainLayout>
                 <Routes>
+                  {/* Main Pages */}
                   <Route path="/" element={<Index />} />
                   <Route path="/courses" element={<Courses />} />
                   <Route path="/courses/:id" element={<CourseDetail />} />
                   <Route path="/auth" element={<Auth />} />
                   <Route path="/verify-2fa" element={<Verify2FA />} />
                   <Route path="/about" element={<About />} />
+                  <Route path="/settings" element={<Settings />} />
+
+                  {/* Dashboards */}
                   <Route path="/dashboard/student" element={<StudentDashboard />} />
                   <Route path="/dashboard/teacher" element={<TeacherDashboard />} />
+                  <Route path="/dashboard/teacher/create-course" element={<CreateCourse />} />
                   <Route path="/dashboard/admin" element={<AdminDashboard />} />
-                  <Route path="/settings" element={<Settings />} />
-                  {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+
+                  {/* Catch-all 404 */}
                   <Route path="*" element={<NotFound />} />
                 </Routes>
               </MainLayout>
