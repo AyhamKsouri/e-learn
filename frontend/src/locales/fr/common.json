@@ -115,9 +115,42 @@
       "becomeTeacher": "Devenir enseignant",
       "imgAlt": "Illustration de la plateforme d'apprentissage en ligne"
     },
+    "teacherHero": {
+      "title": "Enseigner. Partager. Inspirer.",
+      "subtitle": "Créez et vendez des cours en ligne avec notre plateforme d'enseignement complète. Construisez votre programme, engagez les étudiants et développez votre entreprise éducative.",
+      "dashboard": "Commencer à Enseigner",
+      "createCourse": "Créer un Cours",
+      "imgAlt": "Illustration de la plateforme d'enseignement"
+    },
+    "teacherFeatures": {
+      "title": "Tout Ce Dont Vous Avez Besoin pour Réussir",
+      "subtitle": "Notre plateforme fournit tous les outils nécessaires pour créer, commercialiser et vendre vos cours en ligne."
+    },
     "featured": {
       "title": "Cours à la une",
-      "subtitle": "Sélectionnés pour bien démarrer."
+      "subtitle": "Sélectionnés pour bien démarrer.",
+      "loading": "Chargement des cours à la une...",
+      "noCourses": "Aucun cours disponible pour le moment.",
+      "becomeTeacher": "Devenir Enseignant",
+      "viewAll": "Voir Tous les Cours"
+    },
+    "features": {
+      "learnAtPace": {
+        "title": "Apprenez à Votre Rythme",
+        "description": "Accédez à vos cours à tout moment et apprenez de n'importe où dans le monde."
+      },
+      "expertTeachers": {
+        "title": "Enseignants Experts",
+        "description": "Apprenez auprès de professionnels du secteur et d'éducateurs expérimentés."
+      },
+      "modernTech": {
+        "title": "Technologie Moderne",
+        "description": "Profitez d'une plateforme d'apprentissage fluide et adaptée aux mobiles, conçue pour 2025."
+      },
+      "communitySupport": {
+        "title": "Support Communautaire",
+        "description": "Rejoignez notre communauté d'étudiants et obtenez de l'aide quand vous en avez besoin."
+      }
     }
   },
 
@@ -147,8 +180,15 @@
         "title": "Tableau de bord Enseignant | EduFlow",
         "description": "Créez et gérez vos cours sur EduFlow."
       },
-      "heading": "Votre enseignement",
+      "heading": "Tableau de Bord Enseignant",
+      "subtitle": "Gérez vos cours et suivez votre succès",
+      "loading": "Chargement de vos cours...",
       "createCourse": "Créer un cours",
+      "yourCourses": "Vos Cours",
+      "viewAllCourses": "Voir Tous les Cours",
+      "noCourses": "Aucun cours pour le moment",
+      "noCoursesSubtitle": "Créez votre premier cours pour commencer à enseigner et gagner",
+      "createFirstCourse": "Créer Votre Premier Cours",
       "stats": {
         "totalSales": "Ventes totales",
         "enrolledStudents": "Étudiants inscrits",
@@ -160,7 +200,8 @@
         "title": "Tableau de bord Étudiant | EduFlow",
         "description": "Suivez votre progression sur EduFlow."
       },
-      "heading": "Votre apprentissage",
+      "heading": "Tableau de Bord Étudiant",
+      "subtitle": "Suivez votre progression d'apprentissage et vos réalisations",
       "stats": {
         "activeCourses": "Cours actifs",
         "completed": "Terminés",
@@ -228,7 +269,48 @@
       "studyTimer": "Minuteur d'étude",
       "settings": "Paramètres",
       "signOut": "Se déconnecter"
+    },
+    "courses": {
+      "title": "Mon Parcours d'Apprentissage",
+      "subtitle": "Suivez votre progression et continuez à apprendre",
+      "browseMore": "Parcourir Plus de Cours",
+      "loading": "Chargement de vos cours...",
+      "stats": {
+        "totalCourses": "Total des Cours",
+        "completed": "Terminés",
+        "inProgress": "En Cours",
+        "avgProgress": "Prog. Moy."
+      },
+      "search": "Rechercher vos cours...",
+      "noCoursesEnrolled": "Aucun cours inscrit pour le moment",
+      "startJourney": "Commencez votre parcours d'apprentissage en vous inscrivant à votre premier cours",
+      "browseCourses": "Parcourir les Cours",
+      "noCoursesFound": "Aucun cours trouvé",
+      "adjustSearch": "Essayez d'ajuster vos termes de recherche",
+      "clearSearch": "Effacer la Recherche",
+      "continueLearning": "Continuer l'Apprentissage",
+      "reviewCourse": "Réviser le Cours",
+      "progress": "Progression",
+      "lessons": "leçons",
+      "of": "sur",
+      "enrolledCourses": "cours inscrits",
+      "showingCourses": "Affichage de"
     }
+  },
+
+  "teacher": {
+    "profile": {
+      "myDashboard": "Mon tableau de bord",
+      "myCourses": "Mes cours",
+      "createCourse": "Créer un cours",
+      "analytics": "Analyses",
+      "myStudents": "Mes étudiants"
+    }
+  },
+
+  "common": {
+    "settings": "Paramètres",
+    "signOut": "Se déconnecter"
   },
 
   "courseCard": {

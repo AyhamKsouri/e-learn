@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { useIsMobile } from "@/hooks/use-mobile";
 import ThemeToggle from "@/features/theme/ThemeToggle";
 import LanguageSwitcher from "@/features/i18n/LanguageSwitcher";
-import StudentProfileDropdown from "@/components/StudentProfileDropdown";
+import UserProfileDropdown from "@/components/UserProfileDropdown";
 import { useUser } from "@/contexts/UserContext";
 import { useTranslation } from "react-i18next";
 
@@ -41,7 +41,7 @@ export default function MainLayout({ children }: { children: React.ReactNode }) 
 
             {/* Conditional rendering based on auth status */}
             {isAuthenticated ? (
-              <StudentProfileDropdown />
+              <UserProfileDropdown />
             ) : (
               <>
                 <Button asChild variant="outline">

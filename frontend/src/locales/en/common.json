@@ -115,9 +115,42 @@
       "becomeTeacher": "Become a Teacher",
       "imgAlt": "Online learning platform hero illustration"
     },
+    "teacherHero": {
+      "title": "Teach. Share. Inspire.",
+      "subtitle": "Create and sell online courses with our comprehensive teaching platform. Build your curriculum, engage students, and grow your educational business.",
+      "dashboard": "Start Teaching",
+      "createCourse": "Create Course",
+      "imgAlt": "Teaching platform hero illustration"
+    },
+    "teacherFeatures": {
+      "title": "Everything You Need to Succeed",
+      "subtitle": "Our platform provides all the tools you need to create, market, and sell your courses online."
+    },
     "featured": {
       "title": "Featured Courses",
-      "subtitle": "Hand-picked to kickstart your journey."
+      "subtitle": "Hand-picked to kickstart your journey.",
+      "loading": "Loading featured courses...",
+      "noCourses": "No courses available yet.",
+      "becomeTeacher": "Become a Teacher",
+      "viewAll": "View All Courses"
+    },
+    "features": {
+      "learnAtPace": {
+        "title": "Learn at Your Pace",
+        "description": "Access your courses anytime and learn from anywhere in the world."
+      },
+      "expertTeachers": {
+        "title": "Expert Teachers",
+        "description": "Learn from industry professionals and experienced educators."
+      },
+      "modernTech": {
+        "title": "Modern Technology",
+        "description": "Enjoy a smooth, mobile-friendly learning platform built for 2025."
+      },
+      "communitySupport": {
+        "title": "Community Support",
+        "description": "Join our student community and get help whenever you need it."
+      }
     }
   },
 
@@ -147,8 +180,15 @@
         "title": "Teacher Dashboard | EduFlow",
         "description": "Create and manage your courses on EduFlow."
       },
-      "heading": "Your Teaching",
+      "heading": "Teacher Dashboard",
+      "subtitle": "Manage your courses and track your success",
+      "loading": "Loading your courses...",
       "createCourse": "Create Course",
+      "yourCourses": "Your Courses",
+      "viewAllCourses": "View All Courses",
+      "noCourses": "No courses yet",
+      "noCoursesSubtitle": "Create your first course to start teaching and earning",
+      "createFirstCourse": "Create Your First Course",
       "stats": {
         "totalSales": "Total Sales",
         "enrolledStudents": "Enrolled Students",
@@ -160,7 +200,8 @@
         "title": "Student Dashboard | EduFlow",
         "description": "Track your learning progress on EduFlow."
       },
-      "heading": "Your Learning",
+      "heading": "Student Dashboard",
+      "subtitle": "Track your learning progress and achievements",
       "stats": {
         "activeCourses": "Active Courses",
         "completed": "Completed",
@@ -228,7 +269,48 @@
       "studyTimer": "Study Timer",
       "settings": "Settings",
       "signOut": "Sign Out"
+    },
+    "courses": {
+      "title": "My Learning Journey",
+      "subtitle": "Track your progress and continue learning",
+      "browseMore": "Browse More Courses",
+      "loading": "Loading your courses...",
+      "stats": {
+        "totalCourses": "Total Courses",
+        "completed": "Completed",
+        "inProgress": "In Progress",
+        "avgProgress": "Avg Progress"
+      },
+      "search": "Search your courses...",
+      "noCoursesEnrolled": "No courses enrolled yet",
+      "startJourney": "Start your learning journey by enrolling in your first course",
+      "browseCourses": "Browse Courses",
+      "noCoursesFound": "No courses found",
+      "adjustSearch": "Try adjusting your search terms",
+      "clearSearch": "Clear Search",
+      "continueLearning": "Continue Learning",
+      "reviewCourse": "Review Course",
+      "progress": "Progress",
+      "lessons": "lessons",
+      "of": "of",
+      "enrolledCourses": "enrolled courses",
+      "showingCourses": "Showing"
     }
+  },
+
+  "teacher": {
+    "profile": {
+      "myDashboard": "My Dashboard",
+      "myCourses": "My Courses",
+      "createCourse": "Create Course",
+      "analytics": "Analytics",
+      "myStudents": "My Students"
+    }
+  },
+
+  "common": {
+    "settings": "Settings",
+    "signOut": "Sign Out"
   },
 
   "courseCard": {

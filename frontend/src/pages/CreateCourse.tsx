@@ -73,7 +73,7 @@ const CreateCourse = () => {
       case 3:
         return <MediaStep data={courseData} updateData={updateCourseData} />;
       case 4:
-        return <PublishStep data={courseData} updateData={updateCourseData} />;
+        return <PublishStep data={courseData} updateData={updateCourseData} onPublish={() => {}} />;
       default:
         return null;
     }
@@ -186,12 +186,12 @@ const CreateCourse = () => {
         </Button>
         
         <Button
-          onClick={currentStep === steps.length ? () => navigate("/dashboard/teacher") : nextStep}
+          onClick={nextStep}
           disabled={!isStepValid()}
           className="bg-gradient-to-r from-primary to-primary-glow"
         >
-          {currentStep === steps.length ? "Publish Course" : "Next Step"}
-          {currentStep < steps.length && <ArrowRight className="w-4 h-4 ml-2" />}
+          Next Step
+          <ArrowRight className="w-4 h-4 ml-2" />
         </Button>
       </div>
     </div>

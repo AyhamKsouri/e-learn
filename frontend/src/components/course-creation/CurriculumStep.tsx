@@ -6,7 +6,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-import { CourseData } from "@/pages/CreateCourse";
+import type { CourseData } from "@/pages/CreateCourse";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 
 interface CurriculumStepProps {
@@ -30,11 +30,11 @@ const CurriculumStep = ({ data, updateData }: CurriculumStepProps) => {
     id: "",
     title: "",
     description: "",
-    duration: 0
+    duration: 1
   });
 
   const addLesson = () => {
-    if (!newLesson.title) return;
+    if (!newLesson.title || newLesson.duration < 1) return;
     
     const lesson = {
       ...newLesson,
@@ -42,7 +42,7 @@ const CurriculumStep = ({ data, updateData }: CurriculumStepProps) => {
     };
     
     updateData({ lessons: [...data.lessons, lesson] });
-    setNewLesson({ id: "", title: "", description: "", duration: 0 });
+    setNewLesson({ id: "", title: "", description: "", duration: 1 });
     setIsAddingLesson(false);
   };
 
@@ -134,14 +134,21 @@ const CurriculumStep = ({ data, updateData }: CurriculumStepProps) => {
                   />
                 </div>
                 <div>
-                  <Label htmlFor="lesson-duration">Duration (minutes)</Label>
+                  <Label htmlFor="lesson-duration">Duration (minutes) *</Label>
                   <Input
                     id="lesson-duration"
                     type="number"
+                    min="1"
                     placeholder="15"
                     value={newLesson.duration || ""}
-                    onChange={(e) => setNewLesson({ ...newLesson, duration: parseInt(e.target.value) || 0 })}
+                    onChange={(e) => {
+                      const value = parseInt(e.target.value) || 0;
+                      setNewLesson({ ...newLesson, duration: Math.max(value, 1) });
+                    }}
                   />
+                  <p className="text-xs text-muted-foreground mt-1">
+                    Minimum 1 minute per lesson
+                  </p>
                 </div>
                 <div className="flex justify-end gap-2">
                   <Button variant="outline" onClick={() => setIsAddingLesson(false)}>

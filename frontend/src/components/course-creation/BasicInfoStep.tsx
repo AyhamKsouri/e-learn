@@ -9,25 +9,34 @@ interface BasicInfoStepProps {
   updateData: (data: Partial<CourseData>) => void;
 }
 
+// Updated to match backend enum values exactly
 const categories = [
-  "Web Development",
-  "Mobile Development", 
-  "Data Science",
-  "Design",
-  "Business",
-  "Marketing",
-  "Programming",
-  "Other"
+  "programming",
+  "design", 
+  "business",
+  "marketing",
+  "science",
+  "language",
+  "other"
 ];
 
 const levels = [
-  "Beginner",
-  "Intermediate", 
-  "Advanced",
-  "All Levels"
+  "beginner",
+  "intermediate", 
+  "advanced"
 ];
 
 const BasicInfoStep = ({ data, updateData }: BasicInfoStepProps) => {
+  // Helper function to format category display names
+  const formatCategoryName = (category: string) => {
+    return category.charAt(0).toUpperCase() + category.slice(1);
+  };
+
+  // Helper function to format level display names
+  const formatLevelName = (level: string) => {
+    return level.charAt(0).toUpperCase() + level.slice(1);
+  };
+
   return (
     <div className="space-y-6">
       <div>
@@ -76,7 +85,7 @@ const BasicInfoStep = ({ data, updateData }: BasicInfoStepProps) => {
               <SelectContent>
                 {categories.map((category) => (
                   <SelectItem key={category} value={category}>
-                    {category}
+                    {formatCategoryName(category)}
                   </SelectItem>
                 ))}
               </SelectContent>
@@ -92,7 +101,7 @@ const BasicInfoStep = ({ data, updateData }: BasicInfoStepProps) => {
               <SelectContent>
                 {levels.map((level) => (
                   <SelectItem key={level} value={level}>
-                    {level}
+                    {formatLevelName(level)}
                   </SelectItem>
                 ))}
               </SelectContent>

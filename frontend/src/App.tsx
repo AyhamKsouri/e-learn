@@ -15,7 +15,9 @@ import CourseDetail from "./pages/CourseDetail";
 import Auth from "./pages/Auth";
 import About from "./pages/about";
 import StudentDashboard from "./pages/dashboard/StudentDashboard";
+import StudentCourses from "./pages/dashboard/StudentCourses";
 import TeacherDashboard from "./pages/dashboard/TeacherDashboard";
+import TeacherCourses from "./pages/dashboard/TeacherCourses";
 import CreateCourse from "./pages/CreateCourse";
 import AdminDashboard from "./pages/dashboard/AdminDashboard";
 import Settings from "./pages/Settings";
@@ -46,7 +48,9 @@ const App = () => (
 
                   {/* Dashboards */}
                   <Route path="/dashboard/student" element={<StudentDashboard />} />
+                  <Route path="/dashboard/student/courses" element={<StudentCourses />} />
                   <Route path="/dashboard/teacher" element={<TeacherDashboard />} />
+                  <Route path="/dashboard/teacher/courses" element={<TeacherCourses />} />
                   <Route path="/dashboard/teacher/create-course" element={<CreateCourse />} />
                   <Route path="/dashboard/admin" element={<AdminDashboard />} />
 

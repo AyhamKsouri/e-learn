@@ -1,25 +1,92 @@
 import { useState } from "react";
-import { Eye, Globe, Users, DollarSign, Clock, BookOpen } from "lucide-react";
+import { Eye, Globe, Users, DollarSign, Clock, BookOpen, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
-import { CourseData } from "@/pages/CreateCourse";
+import type { CourseData } from "@/pages/CreateCourse";
+import { courseAPI } from "@/api/teacher";
+import { useNavigate } from "react-router-dom";
+import { toast } from "@/hooks/use-toast";
 
 interface PublishStepProps {
   data: CourseData;
   updateData: (data: Partial<CourseData>) => void;
+  onPublish: () => void;
 }
 
-const PublishStep = ({ data }: PublishStepProps) => {
+const PublishStep = ({ data, onPublish }: PublishStepProps) => {
+  const navigate = useNavigate();
   const [isPublic, setIsPublic] = useState(true);
   const [enableEnrollment, setEnableEnrollment] = useState(true);
+  const [isPublishing, setIsPublishing] = useState(false);
 
-  const totalDuration = data.lessons.reduce((sum, lesson) => sum + lesson.duration, 0);
-  const hours = Math.floor(totalDuration / 60);
-  const minutes = totalDuration % 60;
+  const handlePublish = async () => {
+    try {
+      setIsPublishing(true);
+      
+      // Calculate duration in hours, ensuring minimum of 1 hour
+      const totalMinutes = data.lessons.reduce((sum, lesson) => sum + lesson.duration, 0);
+      const durationHours = Math.max(totalMinutes / 60, 1); // Minimum 1 hour
+      
+      // Validate minimum course duration
+      if (totalMinutes < 60) {
+        toast({
+          title: "Course too short",
+          description: "Your course must be at least 1 hour long. Please add more lessons or increase lesson durations.",
+          variant: "destructive",
+        });
+        return;
+      }
+      
+      // Prepare course data for API
+      const courseData = {
+        title: data.title,
+        description: data.description,
+        category: data.category,
+        price: data.price,
+        level: data.level,
+        duration: durationHours,
+        thumbnail: "", // TODO: Handle file upload
+        tags: [], // TODO: Add tags input
+        lessons: data.lessons.map((lesson, index) => ({
+          title: lesson.title,
+          description: lesson.description,
+          videoUrl: lesson.videoUrl || "",
+          duration: lesson.duration,
+          order: index + 1
+        }))
+      };
+
+      // Create the course
+      const response = await courseAPI.create(courseData);
+      
+      // If course should be published immediately
+      if (isPublic) {
+        await courseAPI.togglePublication(response.course._id);
+      }
+
+      toast({
+        title: "Course created successfully!",
+        description: isPublic ? "Your course is now published and available to students." : "Your course has been saved as a draft.",
+      });
+
+      // Navigate to teacher dashboard
+      navigate("/dashboard/teacher");
+      
+    } catch (error) {
+      console.error('Error creating course:', error);
+      toast({
+        title: "Error creating course",
+        description: error instanceof Error ? error.message : "Failed to create course. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsPublishing(false);
+    }
+  };
 
   return (
     <div className="space-y-6">
@@ -67,9 +134,25 @@ const PublishStep = ({ data }: PublishStepProps) => {
             <div className="text-center p-4 bg-muted/50 rounded-lg">
               <Clock className="w-6 h-6 mx-auto text-primary mb-2" />
               <div className="text-lg font-semibold">
-                {hours}h {minutes}m
+                {(() => {
+                  const totalMinutes = data.lessons.reduce((sum, lesson) => sum + lesson.duration, 0);
+                  const hours = Math.floor(totalMinutes / 60);
+                  const minutes = totalMinutes % 60;
+                  return hours > 0 ? `${hours}h ${minutes}m` : `${minutes}m`;
+                })()}
               </div>
               <div className="text-sm text-muted-foreground">Duration</div>
+              {(() => {
+                const totalMinutes = data.lessons.reduce((sum, lesson) => sum + lesson.duration, 0);
+                if (totalMinutes < 60) {
+                  return (
+                    <div className="text-xs text-amber-600 mt-1">
+                      ⚠️ Minimum 1 hour required
+                    </div>
+                  );
+                }
+                return null;
+              })()}
             </div>
             <div className="text-center p-4 bg-muted/50 rounded-lg">
               <DollarSign className="w-6 h-6 mx-auto text-primary mb-2" />
@@ -183,9 +266,42 @@ const PublishStep = ({ data }: PublishStepProps) => {
               <div className="w-2 h-2 bg-success rounded-full"></div>
               Course price set
             </li>
+            <li className="flex items-center gap-2">
+              <div className="w-2 h-2 bg-success rounded-full"></div>
+              Course duration: {(() => {
+                const totalMinutes = data.lessons.reduce((sum, lesson) => sum + lesson.duration, 0);
+                const hours = Math.floor(totalMinutes / 60);
+                const minutes = totalMinutes % 60;
+                return hours > 0 ? `${hours}h ${minutes}m` : `${minutes}m`;
+              })()} (minimum 1 hour)
+            </li>
           </ul>
         </CardContent>
       </Card>
+
+      {/* Publish Button */}
+      <div className="flex justify-center">
+        <Button
+          onClick={handlePublish}
+          disabled={isPublishing || (() => {
+            const totalMinutes = data.lessons.reduce((sum, lesson) => sum + lesson.duration, 0);
+            return totalMinutes < 60;
+          })()}
+          size="lg"
+          className="bg-gradient-to-r from-primary to-primary-glow px-8 py-3 text-lg"
+        >
+          {isPublishing ? (
+            <>
+              <Loader2 className="w-5 h-5 mr-2 animate-spin" />
+              {isPublic ? "Publishing Course..." : "Creating Course..."}
+            </>
+          ) : (
+            <>
+              {isPublic ? "Publish Course" : "Create Draft"}
+            </>
+          )}
+        </Button>
+      </div>
     </div>
   );
 };

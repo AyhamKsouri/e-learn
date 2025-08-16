@@ -96,3 +96,4 @@ export default function Verify2FA() {
     </div>
   );
 }
+
