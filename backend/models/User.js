@@ -32,6 +32,11 @@ const userSchema = new mongoose.Schema({
         type: String,
         default: '',
     },
+    bio: {
+        type: String,
+        default: '',
+        maxlength: 500,
+    },
     // Security Settings
     twoFactorEnabled: {
         type: Boolean,
