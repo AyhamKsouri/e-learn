@@ -69,7 +69,7 @@ export const coursesAPI = {
   // Get all published courses with filters
   getAll: async (filters?: CourseFilters): Promise<CoursesResponse> => {
     const queryParams = new URLSearchParams();
-    
+
     if (filters?.page) queryParams.append('page', filters.page.toString());
     if (filters?.limit) queryParams.append('limit', filters.limit.toString());
     if (filters?.category) queryParams.append('category', filters.category);
@@ -77,16 +77,16 @@ export const coursesAPI = {
     if (filters?.search) queryParams.append('search', filters.search);
     if (filters?.sortBy) queryParams.append('sortBy', filters.sortBy);
     if (filters?.sortOrder) queryParams.append('sortOrder', filters.sortOrder);
-    
+
     const url = `${API_URL}/courses${queryParams.toString() ? `?${queryParams.toString()}` : ''}`;
-    
+
     const response = await fetch(url);
     const data = await response.json();
-    
+
     if (!response.ok) {
       throw new Error(data.message || 'Failed to fetch courses');
     }
-    
+
     return data;
   },
 
@@ -94,14 +94,27 @@ export const coursesAPI = {
   getById: async (courseId: string): Promise<Course> => {
     const response = await fetch(`${API_URL}/courses/${courseId}`);
     const data = await response.json();
-    
+
     if (!response.ok) {
       throw new Error(data.message || 'Failed to fetch course');
     }
-    
+
     return data;
   },
-
+  updateCourse: async (courseId: string, courseData: Partial<Course>): Promise<Course> => {
+    const response = await fetch(`${API_URL}/courses/${courseId}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(courseData),
+    });
+    const data = await response.json();
+    if (!response.ok) {
+      throw new Error(data.message || "Failed to update course");
+    }
+    return data;
+  },
   // Get course categories
   getCategories: (): string[] => {
     return ['programming', 'design', 'business', 'marketing', 'science', 'language', 'other'];

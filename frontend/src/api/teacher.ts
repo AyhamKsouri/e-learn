@@ -64,7 +64,7 @@ export const teacherAuth = {
 export const courseAPI = {
   create: async (courseData: {
     title: string;
-    description: string;
+    description: string;  
     category: string;
     level: string;
     price: number;
@@ -97,7 +97,7 @@ export const courseAPI = {
     return makeAuthenticatedRequest(`${API_URL}/courses/${courseId}`);
   },
 
-  update: async (courseId: string, courseData: any) => {
+  updatecourse: async (courseId: string, courseData: any) => {
     return makeAuthenticatedRequest(`${API_URL}/courses/${courseId}`, {
       method: 'PUT',
       body: JSON.stringify(courseData),

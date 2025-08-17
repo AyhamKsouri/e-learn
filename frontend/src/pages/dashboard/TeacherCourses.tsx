@@ -7,7 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useNavigate } from "react-router-dom";
 import { courseAPI } from "@/api/teacher";
-import { Course } from "@/api/courses";
+import { type Course } from "@/api/courses";
 import { toast } from "@/hooks/use-toast";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 
@@ -287,6 +287,14 @@ const TeacherCourses = () => {
                     onClick={() => handleTogglePublication(course._id, course.isPublished)}
                   >
                     {course.isPublished ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                  </Button>
+                  <Button 
+                    size="sm" 
+                    variant="outline"
+                    onClick={() => navigate(`/dashboard/teacher/courses/${course._id}/lessons`)}
+                  >
+                    <BookOpen className="w-4 h-4 mr-2" />
+                    Manage Lessons
                   </Button>
                   <Button 
                     size="sm" 

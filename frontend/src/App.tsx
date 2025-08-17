@@ -3,7 +3,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
 import ThemeProvider from "@/providers/ThemeProvider";
 import { UserProvider } from "@/contexts/UserContext";
@@ -23,47 +23,61 @@ import AdminDashboard from "./pages/dashboard/AdminDashboard";
 import Settings from "./pages/Settings";
 import NotFound from "./pages/NotFound";
 import Verify2FA from "./pages/Verify2FA";
+import LessonManagement from "./pages/dashboard/LessonManagement";
+import LessonAnalytics from "./pages/dashboard/LessonAnalytics";
+
+
 
 const queryClient = new QueryClient();
 
-const App = () => (
-  <HelmetProvider>
-    <QueryClientProvider client={queryClient}>
-      <ThemeProvider>
-        <UserProvider>
-          <TooltipProvider>
-            <Toaster />
-            <Sonner />
-            <BrowserRouter>
-              <MainLayout>
-                <Routes>
-                  {/* Main Pages */}
-                  <Route path="/" element={<Index />} />
-                  <Route path="/courses" element={<Courses />} />
-                  <Route path="/courses/:id" element={<CourseDetail />} />
-                  <Route path="/auth" element={<Auth />} />
-                  <Route path="/verify-2fa" element={<Verify2FA />} />
-                  <Route path="/about" element={<About />} />
-                  <Route path="/settings" element={<Settings />} />
+function App() {
+  return (
+    <HelmetProvider>
+      <QueryClientProvider client={queryClient}>
+        <ThemeProvider>
+          <UserProvider>
+            <TooltipProvider>
+              <Router>
+                <MainLayout>
+                  <Routes>
+                    <Route path="/" element={<Index />} />
+                    <Route path="/auth" element={<Auth />} />
+                    <Route path="/courses" element={<Courses />} />
+                    <Route path="/courses/:id" element={<CourseDetail />} />
+                    <Route path="/about" element={<About />} />
+                    
+                    {/* Teacher Routes */}
+                    <Route path="/dashboard/teacher" element={<TeacherDashboard />} />
+                    <Route path="/dashboard/teacher/courses" element={<TeacherCourses />} />
+                    <Route path="/dashboard/teacher/courses/:courseId" element={<TeacherCourses />} />
+                    <Route path="/dashboard/teacher/courses/:courseId/lessons" element={<LessonManagement />} />
+                    <Route path="/dashboard/teacher/lessons/:lessonId/analytics" element={<LessonAnalytics />} />
+                    <Route path="/dashboard/teacher/create-course" element={<CreateCourse />} />
 
-                  {/* Dashboards */}
-                  <Route path="/dashboard/student" element={<StudentDashboard />} />
-                  <Route path="/dashboard/student/courses" element={<StudentCourses />} />
-                  <Route path="/dashboard/teacher" element={<TeacherDashboard />} />
-                  <Route path="/dashboard/teacher/courses" element={<TeacherCourses />} />
-                  <Route path="/dashboard/teacher/create-course" element={<CreateCourse />} />
-                  <Route path="/dashboard/admin" element={<AdminDashboard />} />
-
-                  {/* Catch-all 404 */}
-                  <Route path="*" element={<NotFound />} />
-                </Routes>
-              </MainLayout>
-            </BrowserRouter>
-          </TooltipProvider>
-        </UserProvider>
-      </ThemeProvider>
-    </QueryClientProvider>
-  </HelmetProvider>
-);
+                    
+                    {/* Dashboard Routes */}
+                    
+                    {/* Student Routes */}
+                    <Route path="/dashboard/student" element={<StudentDashboard />} />
+                    <Route path="/dashboard/student/courses" element={<StudentCourses />} />
+                    
+                    {/* Admin Routes */}
+                    <Route path="/dashboard/admin" element={<AdminDashboard />} />
+                    
+                    {/* Common Routes */}
+                    <Route path="/settings" element={<Settings />} />
+                    <Route path="/verify-2fa" element={<Verify2FA />} />
+                    <Route path="*" element={<NotFound />} />
+                  </Routes>
+                </MainLayout>
+                <Toaster />
+              </Router>
+            </TooltipProvider>
+          </UserProvider>
+        </ThemeProvider>
+      </QueryClientProvider>
+    </HelmetProvider>
+  );
+}
 
 export default App;
