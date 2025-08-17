@@ -264,45 +264,51 @@ const TeacherCourses = () => {
                   </div>
                 </div>
 
-                <div className="flex gap-2">
-                  <Button 
-                    size="sm" 
-                    variant="outline" 
-                    className="flex-1"
-                    onClick={() => navigate(`/dashboard/teacher/courses/${course._id}`)}
-                  >
-                    <Eye className="w-4 h-4 mr-1" />
-                    View
-                  </Button>
+                <div className="space-y-2">
+                  <div className="flex gap-2">
+                    <Button 
+                      size="sm" 
+                      variant="outline" 
+                      className="flex-1"
+                      onClick={() => navigate(`/dashboard/teacher/courses/${course._id}`)}
+                    >
+                      <Eye className="w-4 h-4 mr-1" />
+                      View
+                    </Button>
+                    <Button 
+                      size="sm" 
+                      variant="outline"
+                      onClick={() => navigate(`/dashboard/teacher/courses/${course._id}/edit`)}
+                      title="Edit Course"
+                    >
+                      <Edit3 className="w-4 h-4" />
+                    </Button>
+                    <Button 
+                      size="sm" 
+                      variant={course.isPublished ? "outline" : "default"}
+                      onClick={() => handleTogglePublication(course._id, course.isPublished)}
+                      title={course.isPublished ? "Unpublish" : "Publish"}
+                    >
+                      {course.isPublished ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                    </Button>
+                    <Button 
+                      size="sm" 
+                      variant="outline"
+                      onClick={() => handleDeleteCourse(course._id, course.title)}
+                      className="text-destructive hover:text-destructive"
+                      title="Delete Course"
+                    >
+                      <Trash2 className="w-4 h-4" />
+                    </Button>
+                  </div>
                   <Button 
                     size="sm" 
                     variant="outline"
-                    onClick={() => navigate(`/dashboard/teacher/courses/${course._id}/edit`)}
-                  >
-                    <Edit3 className="w-4 h-4" />
-                  </Button>
-                  <Button 
-                    size="sm" 
-                    variant={course.isPublished ? "outline" : "default"}
-                    onClick={() => handleTogglePublication(course._id, course.isPublished)}
-                  >
-                    {course.isPublished ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
-                  </Button>
-                  <Button 
-                    size="sm" 
-                    variant="outline"
+                    className="w-full"
                     onClick={() => navigate(`/dashboard/teacher/courses/${course._id}/lessons`)}
                   >
                     <BookOpen className="w-4 h-4 mr-2" />
                     Manage Lessons
-                  </Button>
-                  <Button 
-                    size="sm" 
-                    variant="outline"
-                    onClick={() => handleDeleteCourse(course._id, course.title)}
-                    className="text-destructive hover:text-destructive"
-                  >
-                    <Trash2 className="w-4 h-4" />
                   </Button>
                 </div>
               </CardContent>
@@ -324,4 +330,3 @@ const TeacherCourses = () => {
 };
 
 export default TeacherCourses;
-

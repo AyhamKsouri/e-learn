@@ -23,7 +23,7 @@ export interface CourseData {
   level: string;
   price: number;
   lessons: Array<{
-    id: string;
+    id?: string;
     title: string;
     description: string;
     duration: number;

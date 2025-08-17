@@ -25,6 +25,7 @@ import NotFound from "./pages/NotFound";
 import Verify2FA from "./pages/Verify2FA";
 import LessonManagement from "./pages/dashboard/LessonManagement";
 import LessonAnalytics from "./pages/dashboard/LessonAnalytics";
+import EditCourse from "./pages/EditCourse";
 
 
 
@@ -50,6 +51,7 @@ function App() {
                     <Route path="/dashboard/teacher" element={<TeacherDashboard />} />
                     <Route path="/dashboard/teacher/courses" element={<TeacherCourses />} />
                     <Route path="/dashboard/teacher/courses/:courseId" element={<TeacherCourses />} />
+                    <Route path="/dashboard/teacher/courses/:courseId/edit" element={<EditCourse />} />
                     <Route path="/dashboard/teacher/courses/:courseId/lessons" element={<LessonManagement />} />
                     <Route path="/dashboard/teacher/lessons/:lessonId/analytics" element={<LessonAnalytics />} />
                     <Route path="/dashboard/teacher/create-course" element={<CreateCourse />} />
